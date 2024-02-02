@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "7470e610-e708-4cd2-8f03-23540a678782",
+		"name": "Pais",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29089140",
+		"_collection_link": "https://crimson-spaceship-325926.postman.co/workspace/27779356-4d60-4045-b64c-296c971de917/collection/29089140-7470e610-e708-4cd2-8f03-23540a678782?action=share&source=collection_link&creator=29089140"
+	},
+	"item": [
+		{
+			"name": "Listando Todos Paises",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pais",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pais"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

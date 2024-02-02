@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "e7236ec8-4635-4cd4-8093-ecffd7fb29cf",
+		"name": "Estado",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29089140",
+		"_collection_link": "https://crimson-spaceship-325926.postman.co/workspace/27779356-4d60-4045-b64c-296c971de917/collection/29089140-e7236ec8-4635-4cd4-8093-ecffd7fb29cf?action=share&source=collection_link&creator=29089140"
+	},
+	"item": [
+		{
+			"name": "Listando Todos Estados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/estado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"estado"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

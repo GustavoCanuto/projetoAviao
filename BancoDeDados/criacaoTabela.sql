@@ -1,14 +1,14 @@
 CREATE TABLE tb_pais(
     id  INT NOT NULL ,
-    nome VARCHAR (75) NOT NULL,
-    sigla   CHAR(5)  NOT null,
+    nome VARCHAR (75) NOT NULL unique,
+    sigla   CHAR(5)  NOT NULL,
     PRIMARY KEY (Id)
 );
 
 CREATE TABLE tb_estado(
     id  INT primary KEY ,
     nome VARCHAR (75) NOT NULL,
-    uf   CHAR(5)  NOT null,
+    uf   CHAR(5),
     fk_pais int NOT NULL REFERENCES tb_pais(id)
 );
 

@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "c26a29bc-5cab-4475-8a22-def832d00174",
+		"name": "Cidade",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29089140",
+		"_collection_link": "https://crimson-spaceship-325926.postman.co/workspace/27779356-4d60-4045-b64c-296c971de917/collection/29089140-c26a29bc-5cab-4475-8a22-def832d00174?action=share&source=collection_link&creator=29089140"
+	},
+	"item": [
+		{
+			"name": "Listando Todas Cidades",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cidade",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detalhar Cidade Por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cidade/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detalhar Cidade Por nome Cidade",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cidade?nome=le",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "le"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detalhar Cidade Por ID Estado e Nome Cidade",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cidade/estado/7?nome=Brasíli",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade",
+						"estado",
+						"7"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "Brasíli"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listando Cidade por ID Estado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cidade/estado/26",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cidade",
+						"estado",
+						"26"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
