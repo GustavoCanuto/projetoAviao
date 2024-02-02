@@ -1,4 +1,4 @@
-package br.com.magnasistemas.apipassagem.infra.exception;
+package br.com.magnasistemas.apipassagem.infra;
 
 import java.util.List;
 
@@ -12,15 +12,23 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.com.magnasistemas.apipassagem.validacoes.ValidacaoException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 @RestControllerAdvice
-public class TratadorDeErros{
+public class TratadorDeErro {
+
 
 	@ExceptionHandler(EntityNotFoundException.class)
 	public ResponseEntity<String> tratarErro404() {
 
 		return ResponseEntity.notFound().build();
 
+	}
+	
+	
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ResponseEntity<String> tratarErro404NaoEncontrado(NoHandlerFoundException ex) {
+	    return ResponseEntity.notFound().build();
 	}
 
 	@ExceptionHandler(ValidacaoException.class)
@@ -39,7 +47,7 @@ public class TratadorDeErros{
 	public ResponseEntity<String> tratarErroForeignKeyConstraint(DataIntegrityViolationException ex) {
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body("Não é possível excluir devido existir passagem registrada com essa entidade.");
+				.body("Não é possível excluir devido existir outra entidade vinculada a essa.");
 
 	}
 	
@@ -48,10 +56,12 @@ public class TratadorDeErros{
         var erros = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(erros.stream().map(DadosErroValidacao::new).toList());
     }
+
     
     private record DadosErroValidacao(String campo, String mensagem) {
         public DadosErroValidacao(FieldError erro) {
             this(erro.getField(), erro.getDefaultMessage());
         }
     }
+
 }

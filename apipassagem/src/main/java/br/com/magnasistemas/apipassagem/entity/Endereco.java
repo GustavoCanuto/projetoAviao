@@ -38,6 +38,14 @@ public class Endereco {
 		this.numero = dados.numero();
 		this.complemento = dados.complemento();
 	}
+	
+	public Endereco(String logradouro,String numero,String complemento,String cep, Cidade cidade) {
+		this.cidade = cidade;
+		this.logradouro = logradouro;
+		this.cep = cep;
+		this.numero = numero;
+		this.complemento = complemento;
+	}
 
 	public Long getId() {
 		return id;

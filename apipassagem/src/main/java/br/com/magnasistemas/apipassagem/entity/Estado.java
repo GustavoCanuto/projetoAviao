@@ -45,10 +45,11 @@ public class Estado {
 
 	}
 
-	public Estado(String nome, String uf) {
+	public Estado(String nome, String uf, Pais pais) {
 
 		this.nome = nome;
 		this.uf = uf;
+		this.pais = pais;
 
 	}
 
