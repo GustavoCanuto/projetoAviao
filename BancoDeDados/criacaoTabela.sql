@@ -37,8 +37,8 @@ CREATE TABLE tb_companhia_aerea(
 CREATE TABLE tb_aeronave(
     id bigserial PRIMARY KEY,
     modelo  VARCHAR(100) not null,
-    qtdAssentosEconomico int not null, 
-    qtdAssentosVIP int not null,
+    qtd_assento_economico bigint not null, 
+    qtd_assento_vip bigint not null,
     NSA VARCHAR(20) not null unique,
     fk_companhia int not null references tb_companhia_aerea(id)
 );

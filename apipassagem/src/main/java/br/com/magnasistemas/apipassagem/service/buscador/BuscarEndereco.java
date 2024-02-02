@@ -18,9 +18,10 @@ public class BuscarEndereco implements BuscarEntidade<Endereco> {
 
 	public Endereco buscar(Long id) {
 
+		if (id != null) {
 		endereco = enderecoRepository.findById(id)
 				.orElseThrow(() -> new ValidacaoException("Id do Endereco não encontrado"));
-
+		}
 		return endereco;
 	}
 
