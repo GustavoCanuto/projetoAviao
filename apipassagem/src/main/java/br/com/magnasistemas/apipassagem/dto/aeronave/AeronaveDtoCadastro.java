@@ -10,11 +10,11 @@ public record AeronaveDtoCadastro(
 		 
 		 @NotNull
 		 @Size(max = 255)
-		Integer qtdAssentoEconomico,
+		 Long qtdAssentoEconomico,
 		 
 		 @NotNull
 		 @Size(max = 255)
-		Integer qtdAssentoVip,
+		 Long qtdAssentoVip,
 
 		 @NotBlank
 		 @Size(max = 255)
