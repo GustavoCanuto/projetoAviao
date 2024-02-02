@@ -18,22 +18,14 @@ CREATE TABLE tb_cidade(
     fk_estado int NOT NULL REFERENCES tb_estado(id)
 );
 
-CREATE TABLE tb_bairro(
-    id bigserial PRIMARY KEY, 
-    nome VARCHAR(100) NOT null,
-    logradouros varchar(255),
-    fk_cidade int NOT NULL REFERENCES tb_cidade(id)
-);
-
 CREATE TABLE tb_endereco(
     id bigserial PRIMARY KEY, 
     logradouro varchar(255),
     numero varchar(255),
     complemento varchar(255),
     cep varchar(15),
-    fk_bairro int NOT NULL REFERENCES tb_bairro(id)
+    fk_cidade int NOT NULL REFERENCES tb_cidade(id)
 );
-
 
 CREATE TABLE tb_companhia_aerea(
     id bigserial PRIMARY KEY,
@@ -41,8 +33,6 @@ CREATE TABLE tb_companhia_aerea(
     cnpj varchar(20) not null unique,
     email VARCHAR(60) unique
 );
-
-
 
 CREATE TABLE tb_aeronave(
     id bigserial PRIMARY KEY,
@@ -53,26 +43,11 @@ CREATE TABLE tb_aeronave(
     fk_companhia int not null references tb_companhia_aerea(id)
 );
 
-CREATE TABLE tb_funcionario(
-    id bigserial PRIMARY KEY,
-    nome_completo VARCHAR(100) NOT NULL,
-    cpf varchar (20) not null unique,
-    data_nascimento date not null, 
-    email VARCHAR(50) unique ,
-    funcao  varchar(100) not null
-);
-
 CREATE TABLE tb_aeroporto(
     id bigserial PRIMARY KEY,
     nome VARCHAR(150) not null,
     email VARCHAR(60) unique,
     fk_endereco int NOT NULL REFERENCES tb_endereco(id)
-);
-
-CREATE TABLE tb_funcionario_aeronave(
-    id bigserial PRIMARY KEY,
-    fk_aeronave int not null references tb_aeronave(id),
-    fk_funcionario int not null references tb_funcionario(id)
 );
 
 CREATE TABLE tb_passageiro(
@@ -82,7 +57,6 @@ CREATE TABLE tb_passageiro(
     data_nascimento date not null, 
     email VARCHAR(50) unique 
 );
-
 
 CREATE TABLE tb_passagem(
     id bigserial PRIMARY KEY,
@@ -96,5 +70,3 @@ CREATE TABLE tb_passagem(
     valor_passagem decimal not null, 
   	fk_passageiro INT not null references tb_passageiro(id)
 );
-
-
