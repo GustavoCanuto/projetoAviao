@@ -8,11 +8,11 @@ public record AeronaveDtoAtualizar(
 		 Long idCompanhia,
 		 
 		 @Size(max = 255)
-		 Long qtdAssentoEconomico,
+		 Integer qtdAssentoEconomico,
 		 
 		 
 		 @Size(max = 255)
-		 Long qtdAssentoVip
+		 Integer qtdAssentoVip
 
 		
 		 ) {
