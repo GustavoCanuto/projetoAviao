@@ -1,7 +1,7 @@
 package br.com.magnasistemas.apipassagem.entity;
 
-import br.com.magnasistemas.apipassagem.dto.companhiaAerea.CompanhiaAereaDtoAtualizar;
-import br.com.magnasistemas.apipassagem.dto.companhiaAerea.CompanhiaAereaDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoAtualizar;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoCadastro;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

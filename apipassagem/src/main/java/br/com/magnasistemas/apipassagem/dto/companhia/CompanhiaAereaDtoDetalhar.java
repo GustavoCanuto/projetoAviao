@@ -1,4 +1,4 @@
-package br.com.magnasistemas.apipassagem.dto.companhiaAerea;
+package br.com.magnasistemas.apipassagem.dto.companhia;
 
 import br.com.magnasistemas.apipassagem.entity.CompanhiaAerea;
 

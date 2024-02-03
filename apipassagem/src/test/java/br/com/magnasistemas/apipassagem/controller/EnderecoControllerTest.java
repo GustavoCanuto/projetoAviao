@@ -21,8 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
-import br.com.magnasistemas.apipassagem.dto.Endereco.EnderecoDtoCadastro;
-import br.com.magnasistemas.apipassagem.dto.Endereco.EnderecoDtoDetalhar;
+import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoDetalhar;
 import br.com.magnasistemas.apipassagem.entity.Cidade;
 import br.com.magnasistemas.apipassagem.entity.Endereco;
 import br.com.magnasistemas.apipassagem.entity.Estado;

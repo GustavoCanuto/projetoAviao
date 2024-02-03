@@ -5,8 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.magnasistemas.apipassagem.dto.Endereco.EnderecoDtoCadastro;
-import br.com.magnasistemas.apipassagem.dto.Endereco.EnderecoDtoDetalhar;
+import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoDetalhar;
 import br.com.magnasistemas.apipassagem.entity.Cidade;
 import br.com.magnasistemas.apipassagem.entity.Endereco;
 import br.com.magnasistemas.apipassagem.repository.EnderecoRepository;

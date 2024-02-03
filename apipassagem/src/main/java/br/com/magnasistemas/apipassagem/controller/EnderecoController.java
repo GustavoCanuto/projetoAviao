@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.magnasistemas.apipassagem.dto.Endereco.EnderecoDtoCadastro;
-import br.com.magnasistemas.apipassagem.dto.Endereco.EnderecoDtoDetalhar;
+import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoDetalhar;
 import br.com.magnasistemas.apipassagem.service.EnderecoService;
 import jakarta.validation.Valid;
 

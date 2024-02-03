@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.magnasistemas.apipassagem.dto.companhiaAerea.CompanhiaAereaDtoAtualizar;
-import br.com.magnasistemas.apipassagem.dto.companhiaAerea.CompanhiaAereaDtoCadastro;
-import br.com.magnasistemas.apipassagem.dto.companhiaAerea.CompanhiaAereaDtoDetalhar;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoAtualizar;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoDetalhar;
 import br.com.magnasistemas.apipassagem.service.CompanhiaService;
 import jakarta.validation.Valid;
 

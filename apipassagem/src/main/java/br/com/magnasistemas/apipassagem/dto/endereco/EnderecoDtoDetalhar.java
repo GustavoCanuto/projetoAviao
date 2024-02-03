@@ -1,4 +1,4 @@
-package br.com.magnasistemas.apipassagem.dto.Endereco;
+package br.com.magnasistemas.apipassagem.dto.endereco;
 
 import br.com.magnasistemas.apipassagem.entity.Cidade;
 import br.com.magnasistemas.apipassagem.entity.Endereco;

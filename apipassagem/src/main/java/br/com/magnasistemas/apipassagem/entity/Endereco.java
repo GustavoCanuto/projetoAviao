@@ -1,6 +1,6 @@
 package br.com.magnasistemas.apipassagem.entity;
 
-import br.com.magnasistemas.apipassagem.dto.Endereco.EnderecoDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoCadastro;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

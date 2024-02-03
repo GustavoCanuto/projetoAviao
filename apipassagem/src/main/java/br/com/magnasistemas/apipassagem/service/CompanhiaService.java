@@ -5,9 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.magnasistemas.apipassagem.dto.companhiaAerea.CompanhiaAereaDtoAtualizar;
-import br.com.magnasistemas.apipassagem.dto.companhiaAerea.CompanhiaAereaDtoCadastro;
-import br.com.magnasistemas.apipassagem.dto.companhiaAerea.CompanhiaAereaDtoDetalhar;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoAtualizar;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoDetalhar;
 import br.com.magnasistemas.apipassagem.entity.CompanhiaAerea;
 import br.com.magnasistemas.apipassagem.repository.CompanhiaAereaRepository;
 

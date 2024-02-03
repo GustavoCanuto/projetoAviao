@@ -1,4 +1,4 @@
-package br.com.magnasistemas.apipassagem.dto.Endereco;
+package br.com.magnasistemas.apipassagem.dto.endereco;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

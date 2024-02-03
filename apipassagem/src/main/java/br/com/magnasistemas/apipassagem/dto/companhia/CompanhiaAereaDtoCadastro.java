@@ -1,4 +1,4 @@
-package br.com.magnasistemas.apipassagem.dto.companhiaAerea;
+package br.com.magnasistemas.apipassagem.dto.companhia;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
