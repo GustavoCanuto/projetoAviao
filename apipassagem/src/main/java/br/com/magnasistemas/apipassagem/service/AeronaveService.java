@@ -24,13 +24,13 @@ public class AeronaveService {
 
 	public  AeronaveDtoDetalhar cadastrar( AeronaveDtoCadastro dados) {
 
-		CompanhiaAerea endereco = getCompanhia.buscar(dados.idCompanhia());
+		CompanhiaAerea companhia = getCompanhia.buscar(dados.idCompanhia());
 
-		 Aeronave aeropoporto = new Aeronave(dados, endereco); 
+		 Aeronave entidade = new Aeronave(dados, companhia); 
 
-		 aeronaveRepository.save(aeropoporto);
+		 aeronaveRepository.save(entidade);
 
-		return new  AeronaveDtoDetalhar(aeropoporto);
+		return new  AeronaveDtoDetalhar(entidade);
 
 	}
 
@@ -50,15 +50,15 @@ public class AeronaveService {
 
 	public AeronaveDtoDetalhar atualizarCadastro(AeronaveDtoAtualizar dados, long id) {
 
-		CompanhiaAerea endereco = getCompanhia.buscar(dados.idCompanhia());
+		CompanhiaAerea companhia = getCompanhia.buscar(dados.idCompanhia());
 
-		Aeronave aeroporto = aeronaveRepository.getReferenceById(id);
+		Aeronave entidade = aeronaveRepository.getReferenceById(id);
 
-		aeroporto.atualizarInformacoes(dados, endereco);
+		entidade.atualizarInformacoes(dados, companhia);
 
-		aeronaveRepository.save(aeroporto);
+		aeronaveRepository.save(entidade);
 
-		return new AeronaveDtoDetalhar(aeroporto);
+		return new AeronaveDtoDetalhar(entidade);
 
 	}
 

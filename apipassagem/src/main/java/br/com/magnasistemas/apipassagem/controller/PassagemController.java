@@ -34,7 +34,7 @@ public class PassagemController {
 
 		var bairro = aeroportoService.cadastrar(dados);
 
-		var uri = uriBuilder.path("/bairro/{id}").buildAndExpand(bairro.id()).toUri();
+		var uri = uriBuilder.path("/passagem/{id}").buildAndExpand(bairro.id()).toUri();
 
 		return ResponseEntity.created(uri).body(bairro);
 

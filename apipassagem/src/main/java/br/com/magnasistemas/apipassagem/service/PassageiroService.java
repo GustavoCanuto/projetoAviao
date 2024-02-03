@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroAereaDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoCadastro;
 import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoDetalhar;
 import br.com.magnasistemas.apipassagem.entity.Passageiro;
 import br.com.magnasistemas.apipassagem.repository.PassageiroRepository;
@@ -17,7 +17,7 @@ public class PassageiroService {
 	private PassageiroRepository passageiroRepository;
 
 
-	public PassageiroDtoDetalhar cadastrar(PassageiroAereaDtoCadastro dados) {
+	public PassageiroDtoDetalhar cadastrar(PassageiroDtoCadastro dados) {
 
 		Passageiro aeropoporto = new Passageiro(dados); 
 

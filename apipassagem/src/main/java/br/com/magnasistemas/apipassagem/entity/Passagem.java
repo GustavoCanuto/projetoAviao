@@ -24,6 +24,8 @@ public class Passagem {
 	private LocalDateTime timestampPartida;
 
 	private LocalDateTime timestampChegada;
+	
+	private Double valorPassagem;
 
 	@ManyToOne
 	@JoinColumn(name = "fk_origem")
@@ -53,46 +55,10 @@ public class Passagem {
 		this.valorPassagem = dados.valorPassagem();
 	}
 
-
-
-
-
-	public Aeroporto getIdOrigem() {
-		return idOrigem;
-	}
-
-
-
-
-
-	public Aeroporto getIdDestino() {
-		return idDestino;
-	}
-
-
-
-
-
-	public Aeronave getIdAeronave() {
-		return idAeronave;
-	}
-
-
-
-
-
-	public Passageiro getIdPassageiro() {
-		return idPassageiro;
-	}
-
-
-
-
-
-	public Passagem(Long id, LocalDateTime timestampCompra, LocalDateTime timestampPartida,
+	public Passagem(LocalDateTime timestampCompra, LocalDateTime timestampPartida,
 			LocalDateTime timestampChegada, Aeroporto idOrigem, Aeroporto idDestino, Aeronave idAeronave,
 			Passageiro idPassageiro, Double valorPassagem) {
-		super();
+
 		this.timestampCompra = timestampCompra;
 		this.timestampPartida = timestampPartida;
 		this.timestampChegada = timestampChegada;
@@ -103,14 +69,25 @@ public class Passagem {
 		this.valorPassagem = valorPassagem;
 	}
 
-
-
-
-
 	public Passagem() {
-		super();
+	
 	}
 
+	public Aeroporto getIdOrigem() {
+		return idOrigem;
+	}
+
+	public Aeroporto getIdDestino() {
+		return idDestino;
+	}
+
+	public Aeronave getIdAeronave() {
+		return idAeronave;
+	}
+
+	public Passageiro getIdPassageiro() {
+		return idPassageiro;
+	}
 
 	public Long getId() {
 		return id;
@@ -137,7 +114,5 @@ public class Passagem {
 		return valorPassagem;
 	}
 
-
-	Double valorPassagem;
 
 }

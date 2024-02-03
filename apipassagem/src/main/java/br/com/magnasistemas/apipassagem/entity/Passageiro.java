@@ -2,7 +2,7 @@ package br.com.magnasistemas.apipassagem.entity;
 
 import java.time.LocalDate;
 
-import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroAereaDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoCadastro;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -49,7 +49,7 @@ public class Passageiro {
 
 	String email;
 
-	public Passageiro(Long id, String nomeCompleto, String cpf, LocalDate dataNascimento, String email) {
+	public Passageiro(String nomeCompleto, String cpf, LocalDate dataNascimento, String email) {
 		
 		this.nomeCompleto = nomeCompleto;
 		this.cpf = cpf;
@@ -57,7 +57,7 @@ public class Passageiro {
 		this.email = email;
 	}
 	
-	public Passageiro(PassageiroAereaDtoCadastro dados) {
+	public Passageiro(PassageiroDtoCadastro dados) {
 	
 
 		this.nomeCompleto = dados.nomeCompleto();

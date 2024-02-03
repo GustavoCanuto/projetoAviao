@@ -27,16 +27,16 @@ import jakarta.validation.Valid;
 public class AeronaveController {
 
 	@Autowired
-	private AeronaveService aeroportoService;
+	private AeronaveService aeronaveService;
 
 	@PostMapping
 	@Transactional
 	public ResponseEntity<AeronaveDtoDetalhar> cadastrar(@RequestBody @Valid AeronaveDtoCadastro dados,
 			UriComponentsBuilder uriBuilder) {
 
-		var bairro = aeroportoService.cadastrar(dados);
+		var bairro = aeronaveService.cadastrar(dados);
 
-		var uri = uriBuilder.path("/bairro/{id}").buildAndExpand(bairro.id()).toUri();
+		var uri = uriBuilder.path("/aeronave/{id}").buildAndExpand(bairro.id()).toUri();
 
 		return ResponseEntity.created(uri).body(bairro);
 
@@ -46,14 +46,14 @@ public class AeronaveController {
 	public ResponseEntity<Page<AeronaveDtoDetalhar>> listar(
 			@PageableDefault(size = 10) Pageable paginacao) {
 
-		return ResponseEntity.ok(aeroportoService.listar(paginacao));
+		return ResponseEntity.ok(aeronaveService.listar(paginacao));
 
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<AeronaveDtoDetalhar> detalhar(@PathVariable Long id) {
 
-		return ResponseEntity.ok(aeroportoService.detalhar(id));
+		return ResponseEntity.ok(aeronaveService.detalhar(id));
 	}
 
 
@@ -61,7 +61,7 @@ public class AeronaveController {
 	@Transactional
 	public ResponseEntity<AeronaveDtoDetalhar> atualizar(@PathVariable Long id, @RequestBody AeronaveDtoAtualizar dados) {
 
-		return ResponseEntity.ok(aeroportoService.atualizarCadastro(dados, id));
+		return ResponseEntity.ok(aeronaveService.atualizarCadastro(dados, id));
 
 	}
 
@@ -69,7 +69,7 @@ public class AeronaveController {
 	@Transactional
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 
-		aeroportoService.deletaCadastro(id);
+		aeronaveService.deletaCadastro(id);
 
 		return ResponseEntity.noContent().build();
 	}

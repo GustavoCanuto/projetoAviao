@@ -17,22 +17,22 @@ public class Aeronave {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "fk_companhia")
 	private CompanhiaAerea companhia;
-	
 
+	private String nsa;
+
+	private String modelo;
 
 	private Long qtdAssentoEconomico;
-	
 
 	private Long qtdAssentoVip;
 
-	 public Aeronave(Long id, CompanhiaAerea companhia, Long qtdAssentoEconomico, Long qtdAssentoVip, String nsa,
+	public Aeronave(CompanhiaAerea companhia, Long qtdAssentoEconomico, Long qtdAssentoVip, String nsa,
 			String modelo) {
 
-		
 		this.companhia = companhia;
 		this.qtdAssentoEconomico = qtdAssentoEconomico;
 		this.qtdAssentoVip = qtdAssentoVip;
@@ -41,11 +41,11 @@ public class Aeronave {
 	}
 
 	public Aeronave() {
-		
+
 	}
 
 	public Aeronave(AeronaveDtoCadastro dados, CompanhiaAerea companhia) {
-	
+
 		this.companhia = companhia;
 		this.qtdAssentoEconomico = dados.qtdAssentoEconomico();
 		this.qtdAssentoVip = dados.qtdAssentoVip();
@@ -77,28 +77,20 @@ public class Aeronave {
 		return modelo;
 	}
 
+	public void atualizarInformacoes(AeronaveDtoAtualizar dados, CompanhiaAerea companhiaAerea) {
 
-
-	private String nsa;
-
-	private String modelo;
-	 
-	 
-		public void atualizarInformacoes(AeronaveDtoAtualizar dados, CompanhiaAerea companhiaAerea) {
-
-			if (dados.qtdAssentoVip() != null) {
-				this.qtdAssentoVip = dados.qtdAssentoVip();
-			}
-
-			if (dados.qtdAssentoEconomico() != null) {
-				this.qtdAssentoEconomico = dados.qtdAssentoEconomico();
-			}
-
-			if (companhiaAerea != null) {
-				this.companhia = companhiaAerea;
-			}
-
+		if (dados.qtdAssentoVip() != null) {
+			this.qtdAssentoVip = dados.qtdAssentoVip();
 		}
-	 
-	 
+
+		if (dados.qtdAssentoEconomico() != null) {
+			this.qtdAssentoEconomico = dados.qtdAssentoEconomico();
+		}
+
+		if (companhiaAerea != null) {
+			this.companhia = companhiaAerea;
+		}
+
+	}
+
 }

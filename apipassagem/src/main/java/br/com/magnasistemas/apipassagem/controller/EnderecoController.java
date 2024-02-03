@@ -35,7 +35,7 @@ public class EnderecoController {
 
 		var bairro = enderecoService.cadastrarEndereco(dados);
 
-		var uri = uriBuilder.path("/bairro/{id}").buildAndExpand(bairro.id()).toUri();
+		var uri = uriBuilder.path("/endereco/{id}").buildAndExpand(bairro.id()).toUri();
 
 		return ResponseEntity.created(uri).body(bairro);
 

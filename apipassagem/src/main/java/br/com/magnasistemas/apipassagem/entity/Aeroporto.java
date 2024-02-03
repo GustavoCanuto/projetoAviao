@@ -28,9 +28,9 @@ public class Aeroporto {
 
 	}
 
-	public Aeroporto(Long id, String nome, String email, Endereco endereco) {
+	public Aeroporto( String nome, String email, Endereco endereco) {
 
-		this.id = id;
+		
 		this.nome = nome;
 		this.email = email;
 		this.endereco = endereco;

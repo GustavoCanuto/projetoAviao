@@ -11,27 +11,25 @@ import jakarta.persistence.Table;
 @Table(name = "tb_companhia_aerea")
 @Entity(name = "Companhia")
 public class CompanhiaAerea {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	String nome;
 
-	 String cnpj;
+	private String nome;
 
-	 String email;
+	private String cnpj;
 
-	public CompanhiaAerea(Long id, String nome, String cnpj, String email) {
-		super();
-	
+	private String email;
+
+	public CompanhiaAerea(String nome, String cnpj, String email) {
+
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.email = email;
 	}
-	
-	public CompanhiaAerea(CompanhiaAereaDtoCadastro dados) {
 
+	public CompanhiaAerea(CompanhiaAereaDtoCadastro dados) {
 
 		this.nome = dados.nome();
 		this.cnpj = dados.cnpj();
@@ -39,7 +37,7 @@ public class CompanhiaAerea {
 	}
 
 	public CompanhiaAerea() {
-		super();
+		
 	}
 
 	public Long getId() {
@@ -57,7 +55,7 @@ public class CompanhiaAerea {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void atualizarInformacoes(CompanhiaAereaDtoAtualizar dados) {
 
 		if (dados.nome() != null) {
@@ -73,7 +71,5 @@ public class CompanhiaAerea {
 		}
 
 	}
-
-
 
 }

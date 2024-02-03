@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroAereaDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoCadastro;
 import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoDetalhar;
 import br.com.magnasistemas.apipassagem.service.PassageiroService;
 import jakarta.validation.Valid;
@@ -29,12 +29,12 @@ public class PassageiroController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<PassageiroDtoDetalhar> cadastrar(@RequestBody @Valid PassageiroAereaDtoCadastro dados,
+	public ResponseEntity<PassageiroDtoDetalhar> cadastrar(@RequestBody @Valid PassageiroDtoCadastro dados,
 			UriComponentsBuilder uriBuilder) {
 
 		var bairro = aeroportoService.cadastrar(dados);
 
-		var uri = uriBuilder.path("/bairro/{id}").buildAndExpand(bairro.id()).toUri();
+		var uri = uriBuilder.path("/passageiro/{id}").buildAndExpand(bairro.id()).toUri();
 
 		return ResponseEntity.created(uri).body(bairro);
 

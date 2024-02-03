@@ -9,11 +9,9 @@ public record AeronaveDtoCadastro(
 		 Long idCompanhia,
 		 
 		 @NotNull
-		 @Size(max = 255)
 		 Long qtdAssentoEconomico,
 		 
 		 @NotNull
-		 @Size(max = 255)
 		 Long qtdAssentoVip,
 
 		 @NotBlank
