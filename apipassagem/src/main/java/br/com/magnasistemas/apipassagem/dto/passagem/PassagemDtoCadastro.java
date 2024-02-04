@@ -2,6 +2,7 @@ package br.com.magnasistemas.apipassagem.dto.passagem;
 
 import java.time.LocalDateTime;
 
+import br.com.magnasistemas.apipassagem.enums.TipoAssento;
 import jakarta.validation.constraints.NotNull;
 
 public record PassagemDtoCadastro(
@@ -28,7 +29,10 @@ public record PassagemDtoCadastro(
 	Long idPassageiro,
 	
 	@NotNull 
-	Double valorPassagem
+	Double valorPassagem,
+	
+	@NotNull
+	TipoAssento tipo
 	
 	
 	) {

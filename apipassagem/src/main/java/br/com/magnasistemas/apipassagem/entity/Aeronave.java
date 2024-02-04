@@ -30,8 +30,7 @@ public class Aeronave {
 
 	private Long qtdAssentoVip;
 
-	public Aeronave(CompanhiaAerea companhia, Long qtdAssentoEconomico, Long qtdAssentoVip, String nsa,
-			String modelo) {
+	public Aeronave(CompanhiaAerea companhia, Long qtdAssentoEconomico, Long qtdAssentoVip, String nsa, String modelo) {
 
 		this.companhia = companhia;
 		this.qtdAssentoEconomico = qtdAssentoEconomico;
@@ -91,6 +90,14 @@ public class Aeronave {
 			this.companhia = companhiaAerea;
 		}
 
+	}
+
+	public void setQtdAssentoEconomico(Long qtdAssentoEconomico) {
+		this.qtdAssentoEconomico = qtdAssentoEconomico;
+	}
+
+	public void setQtdAssentoVip(Long qtdAssentoVip) {
+		this.qtdAssentoVip = qtdAssentoVip;
 	}
 
 }

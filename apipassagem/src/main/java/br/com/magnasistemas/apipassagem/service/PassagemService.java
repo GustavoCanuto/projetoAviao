@@ -1,5 +1,7 @@
 package br.com.magnasistemas.apipassagem.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +17,7 @@ import br.com.magnasistemas.apipassagem.repository.PassagemRepository;
 import br.com.magnasistemas.apipassagem.service.buscador.BuscarAeronave;
 import br.com.magnasistemas.apipassagem.service.buscador.BuscarAeroporto;
 import br.com.magnasistemas.apipassagem.service.buscador.BuscarPassageiro;
+import br.com.magnasistemas.apipassagem.validacoes.passagem.ValidarCadastroPassagem;
 
 @Service
 public class PassagemService {
@@ -24,14 +27,15 @@ public class PassagemService {
 
 	@Autowired
 	private BuscarAeronave getAeronave;
-	
+
 	@Autowired
 	private BuscarAeroporto getAeroporto;
-	
+
 	@Autowired
 	private BuscarPassageiro getPassageiro;
 	
-
+	@Autowired
+	private List<ValidarCadastroPassagem> validadoresCadastro;
 
 	public PassagemDtoDetalhar cadastrar(PassagemDtoCadastro dados) {
 
@@ -40,10 +44,11 @@ public class PassagemService {
 		Aeroporto aeroportoDestino = getAeroporto.buscar(dados.idDestino());
 		Passageiro passageiro = getPassageiro.buscar(dados.idPassageiro());
 
+		validadoresCadastro.forEach(v -> v.validar(dados));
+		
+		Passagem passagem = new Passagem(dados, aeroportoOrigem, aeroportoDestino, aeronave, passageiro);
 
-		 Passagem passagem = new Passagem(dados, aeroportoOrigem, aeroportoDestino, aeronave, passageiro); 
-
-		 passagemRepository.save(passagem);
+		passagemRepository.save(passagem);
 
 		return new PassagemDtoDetalhar(passagem);
 
@@ -55,19 +60,16 @@ public class PassagemService {
 
 	}
 
-
-
 	public PassagemDtoDetalhar detalhar(Long id) {
 
 		return new PassagemDtoDetalhar(passagemRepository.getReferenceById(id));
 
 	}
 
-	
-
 	public void deletaCadastro(Long id) {
 
 		passagemRepository.deleteById(id);
 
 	}
+
 }

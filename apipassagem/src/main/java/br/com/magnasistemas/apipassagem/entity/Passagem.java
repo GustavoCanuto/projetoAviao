@@ -3,7 +3,10 @@ package br.com.magnasistemas.apipassagem.entity;
 import java.time.LocalDateTime;
 
 import br.com.magnasistemas.apipassagem.dto.passagem.PassagemDtoCadastro;
+import br.com.magnasistemas.apipassagem.enums.TipoAssento;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,18 +17,21 @@ import jakarta.persistence.Table;
 @Table(name = "tb_passagem")
 @Entity(name = "Passagem")
 public class Passagem {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private LocalDateTime timestampCompra;
-	
+
 	private LocalDateTime timestampPartida;
 
 	private LocalDateTime timestampChegada;
-	
+
 	private Double valorPassagem;
+
+	@Enumerated(EnumType.STRING)
+	private TipoAssento tipoAssento;
 
 	@ManyToOne
 	@JoinColumn(name = "fk_origem")
@@ -38,13 +44,14 @@ public class Passagem {
 	@ManyToOne
 	@JoinColumn(name = " fk_aeronave")
 	private Aeronave idAeronave;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "fk_passageiro")
 	private Passageiro idPassageiro;
 
-	public Passagem(PassagemDtoCadastro dados,Aeroporto idOrigem,Aeroporto idDestino,Aeronave idAeronave,Passageiro idPassageiro) {
-	
+	public Passagem(PassagemDtoCadastro dados, Aeroporto idOrigem, Aeroporto idDestino, Aeronave idAeronave,
+			Passageiro idPassageiro) {
+
 		this.timestampCompra = dados.timestampCompra();
 		this.timestampPartida = dados.timestampPartida();
 		this.timestampChegada = dados.timestampChegada();
@@ -53,11 +60,12 @@ public class Passagem {
 		this.idAeronave = idAeronave;
 		this.idPassageiro = idPassageiro;
 		this.valorPassagem = dados.valorPassagem();
+		this.tipoAssento = dados.tipo();
 	}
 
-	public Passagem(LocalDateTime timestampCompra, LocalDateTime timestampPartida,
-			LocalDateTime timestampChegada, Aeroporto idOrigem, Aeroporto idDestino, Aeronave idAeronave,
-			Passageiro idPassageiro, Double valorPassagem) {
+	public Passagem(LocalDateTime timestampCompra, LocalDateTime timestampPartida, LocalDateTime timestampChegada,
+			Aeroporto idOrigem, Aeroporto idDestino, Aeronave idAeronave, Passageiro idPassageiro,
+			Double valorPassagem,TipoAssento tipoAssento) {
 
 		this.timestampCompra = timestampCompra;
 		this.timestampPartida = timestampPartida;
@@ -67,10 +75,11 @@ public class Passagem {
 		this.idAeronave = idAeronave;
 		this.idPassageiro = idPassageiro;
 		this.valorPassagem = valorPassagem;
+		this.tipoAssento = tipoAssento;
 	}
 
 	public Passagem() {
-	
+
 	}
 
 	public Aeroporto getIdOrigem() {
@@ -93,26 +102,24 @@ public class Passagem {
 		return id;
 	}
 
-
 	public LocalDateTime getTimestampCompra() {
 		return timestampCompra;
 	}
-
 
 	public LocalDateTime getTimestampPartida() {
 		return timestampPartida;
 	}
 
-
 	public LocalDateTime getTimestampChegada() {
 		return timestampChegada;
 	}
-
-
 
 	public Double getValorPassagem() {
 		return valorPassagem;
 	}
 
+	public TipoAssento getTipoAssento() {
+		return tipoAssento;
+	}
 
 }

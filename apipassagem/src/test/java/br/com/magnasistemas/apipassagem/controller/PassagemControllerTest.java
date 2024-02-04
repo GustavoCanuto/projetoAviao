@@ -28,6 +28,7 @@ import br.com.magnasistemas.apipassagem.entity.Estado;
 import br.com.magnasistemas.apipassagem.entity.Pais;
 import br.com.magnasistemas.apipassagem.entity.Passageiro;
 import br.com.magnasistemas.apipassagem.entity.Passagem;
+import br.com.magnasistemas.apipassagem.enums.TipoAssento;
 import br.com.magnasistemas.apipassagem.repository.AeronaveRepository;
 import br.com.magnasistemas.apipassagem.repository.AeroportoRepository;
 import br.com.magnasistemas.apipassagem.repository.CidadeRepository;
@@ -96,9 +97,9 @@ public class PassagemControllerTest {
 
 		passageiroRepository.save(passageiroTeste);
 		
-		Passagem passagemTeste =  new Passagem(LocalDateTime.of(2023, 10, 2, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-				LocalDateTime.of(2023, 10, 2, 15, 30), aeroportoTesteOrigem, aeroportoTesteDestino, aeronaveTeste,
-				passageiroTeste, 200D);
+		Passagem passagemTeste =  new Passagem(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+				LocalDateTime.of(2023, 10, 3, 15, 30), aeroportoTesteOrigem, aeroportoTesteDestino, aeronaveTeste,
+				passageiroTeste, 200D, TipoAssento.ECONOMICO);
 
 		passagemRepository.save(passagemTeste);
 	}
@@ -123,9 +124,9 @@ public class PassagemControllerTest {
 	@DisplayName("Deveria cadastrar uma passagem com informações válidas")
 	void cadastrarCenario1() {
 
-		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(LocalDateTime.of(2023, 10, 2, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-				LocalDateTime.of(2023, 10, 2, 15, 30), 1L, 2L, 1L,
-				1L, 200D);
+		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+				LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L,
+				1L, 200D, TipoAssento.ECONOMICO);
 
 		ResponseEntity<PassagemDtoDetalhar> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody,
 				PassagemDtoDetalhar.class);

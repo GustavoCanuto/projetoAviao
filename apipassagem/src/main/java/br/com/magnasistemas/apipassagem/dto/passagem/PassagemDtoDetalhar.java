@@ -6,6 +6,7 @@ import br.com.magnasistemas.apipassagem.entity.Aeronave;
 import br.com.magnasistemas.apipassagem.entity.Aeroporto;
 import br.com.magnasistemas.apipassagem.entity.Passageiro;
 import br.com.magnasistemas.apipassagem.entity.Passagem;
+import br.com.magnasistemas.apipassagem.enums.TipoAssento;
 
 public record PassagemDtoDetalhar(
 		
@@ -32,13 +33,15 @@ public record PassagemDtoDetalhar(
 		Passageiro idPassageiro,
 		
 		
-		Double valorPassagem
+		Double valorPassagem,
+		
+		TipoAssento tipo
 		) {
 
 	public PassagemDtoDetalhar(Passagem passagem) {
 		this(passagem.getId(), passagem.getTimestampCompra(), 
 				passagem.getTimestampPartida(), passagem.getTimestampChegada(),passagem.getIdOrigem(),passagem.getIdDestino(),
-				passagem.getIdAeronave(),passagem.getIdPassageiro(),passagem.getValorPassagem());
+				passagem.getIdAeronave(),passagem.getIdPassageiro(),passagem.getValorPassagem(), passagem.getTipoAssento());
 	}
 	
 
