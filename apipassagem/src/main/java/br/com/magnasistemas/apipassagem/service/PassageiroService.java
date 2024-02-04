@@ -9,6 +9,7 @@ import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoCadastro;
 import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoDetalhar;
 import br.com.magnasistemas.apipassagem.entity.Passageiro;
 import br.com.magnasistemas.apipassagem.repository.PassageiroRepository;
+import br.com.magnasistemas.apipassagem.validacoes.ValidacaoException;
 
 @Service
 public class PassageiroService {
@@ -18,6 +19,8 @@ public class PassageiroService {
 
 
 	public PassageiroDtoDetalhar cadastrar(PassageiroDtoCadastro dados) {
+		
+		validaDuplicadas(dados);
 
 		Passageiro aeropoporto = new Passageiro(dados); 
 
@@ -39,11 +42,19 @@ public class PassageiroService {
 
 	}
 
-	
-
 	public void deletaCadastro(Long id) {
 
 		passageiroRepository.deleteById(id);
 
+	}
+	
+	private void validaDuplicadas(PassageiroDtoCadastro dados) {
+		if (passageiroRepository.existsByCpf(dados.cpf())) {
+			throw new ValidacaoException("Cpf já registrado!");
+		}
+
+		if (passageiroRepository.existsByEmail(dados.email())) {
+			throw new ValidacaoException("Email já registrado!");
+		}
 	}
 }

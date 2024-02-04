@@ -10,6 +10,7 @@ import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoCadastro;
 import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoDetalhar;
 import br.com.magnasistemas.apipassagem.entity.CompanhiaAerea;
 import br.com.magnasistemas.apipassagem.repository.CompanhiaAereaRepository;
+import br.com.magnasistemas.apipassagem.validacoes.ValidacaoException;
 
 @Service
 public class CompanhiaService {
@@ -20,7 +21,8 @@ public class CompanhiaService {
 
 	public CompanhiaAereaDtoDetalhar cadastrar(CompanhiaAereaDtoCadastro dados) {
 
-
+		validaDuplicadas(dados);
+		
 		CompanhiaAerea aeropoporto = new CompanhiaAerea(dados); 
 
 		 companhiaAereaRepository.save(aeropoporto);
@@ -45,7 +47,8 @@ public class CompanhiaService {
 
 	public CompanhiaAereaDtoDetalhar atualizarCadastro(CompanhiaAereaDtoAtualizar dados, long id) {
 
-
+		validaDuplicadas(dados);
+		
 		CompanhiaAerea aeroporto = companhiaAereaRepository.getReferenceById(id);
 
 		aeroporto.atualizarInformacoes(dados);
@@ -60,5 +63,26 @@ public class CompanhiaService {
 
 		companhiaAereaRepository.deleteById(id);
 
+	}
+	
+	private void validaDuplicadas(CompanhiaAereaDtoCadastro dados) {
+		if (companhiaAereaRepository.existsByCnpj(dados.cnpj())) {
+			throw new ValidacaoException("Cnpj já registrado!");
+		}
+
+		if (companhiaAereaRepository.existsByEmail(dados.email())) {
+			throw new ValidacaoException("Email já registrado!");
+		}
+	}
+	
+	private void validaDuplicadas(CompanhiaAereaDtoAtualizar dados) {
+		
+		if (companhiaAereaRepository.existsByCnpj(dados.cnpj())) {
+			throw new ValidacaoException("Cnpj já registrado!");
+		}
+
+		if (companhiaAereaRepository.existsByEmail(dados.email())) {
+			throw new ValidacaoException("Email já registrado!");
+		}
 	}
 }

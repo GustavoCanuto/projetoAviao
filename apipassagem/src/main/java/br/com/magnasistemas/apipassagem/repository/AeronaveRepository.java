@@ -9,10 +9,11 @@ import jakarta.transaction.Transactional;
 
 public interface AeronaveRepository extends JpaRepository<Aeronave, Long> {
 	
+	boolean existsByNsa(String nsa);
+	
 	@Transactional
 	@Modifying
 	@Query(value = "DELETE FROM tb_aeronave; ALTER SEQUENCE tb_aeronave_id_seq RESTART WITH 1", nativeQuery = true)
 	void deleteAllAndResetSequence();
-
 
 }

@@ -12,6 +12,7 @@ import br.com.magnasistemas.apipassagem.entity.Aeronave;
 import br.com.magnasistemas.apipassagem.entity.CompanhiaAerea;
 import br.com.magnasistemas.apipassagem.repository.AeronaveRepository;
 import br.com.magnasistemas.apipassagem.service.buscador.BuscarCompanhia;
+import br.com.magnasistemas.apipassagem.validacoes.ValidacaoException;
 
 @Service
 public class AeronaveService {
@@ -22,15 +23,17 @@ public class AeronaveService {
 	@Autowired
 	private BuscarCompanhia getCompanhia;
 
-	public  AeronaveDtoDetalhar cadastrar( AeronaveDtoCadastro dados) {
+	public AeronaveDtoDetalhar cadastrar(AeronaveDtoCadastro dados) {
+
+		validaDuplicadas(dados);
 
 		CompanhiaAerea companhia = getCompanhia.buscar(dados.idCompanhia());
 
-		 Aeronave entidade = new Aeronave(dados, companhia); 
+		Aeronave entidade = new Aeronave(dados, companhia);
 
-		 aeronaveRepository.save(entidade);
+		aeronaveRepository.save(entidade);
 
-		return new  AeronaveDtoDetalhar(entidade);
+		return new AeronaveDtoDetalhar(entidade);
 
 	}
 
@@ -39,8 +42,6 @@ public class AeronaveService {
 		return aeronaveRepository.findAll(paginacao).map(AeronaveDtoDetalhar::new);
 
 	}
-
-
 
 	public AeronaveDtoDetalhar detalhar(Long id) {
 
@@ -67,4 +68,12 @@ public class AeronaveService {
 		aeronaveRepository.deleteById(id);
 
 	}
+
+	private void validaDuplicadas(AeronaveDtoCadastro dados) {
+
+		if (aeronaveRepository.existsByNsa(dados.nsa())) {
+			throw new ValidacaoException("Nsa já registrado!");
+		}
+	}
+
 }

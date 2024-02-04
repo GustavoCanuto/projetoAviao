@@ -12,6 +12,7 @@ import br.com.magnasistemas.apipassagem.entity.Aeroporto;
 import br.com.magnasistemas.apipassagem.entity.Endereco;
 import br.com.magnasistemas.apipassagem.repository.AeroportoRepository;
 import br.com.magnasistemas.apipassagem.service.buscador.BuscarEndereco;
+import br.com.magnasistemas.apipassagem.validacoes.ValidacaoException;
 
 @Service
 public class AeroportoService {
@@ -23,6 +24,8 @@ public class AeroportoService {
 	private BuscarEndereco getEndereco;
 
 	public AeroportoDtoDetalhar cadastrar(AeroportoDtoCadastro dados) {
+		
+		validaDuplicadas(dados);
 
 		Endereco endereco = getEndereco.buscar(dados.idEndereco());
 
@@ -49,6 +52,8 @@ public class AeroportoService {
 	}
 
 	public AeroportoDtoDetalhar atualizarCadastro(AeroportoDtoAtualizar dados, long id) {
+		
+		validaDuplicadas(dados);
 
 		Endereco endereco = getEndereco.buscar(dados.idEndereco());
 
@@ -67,4 +72,20 @@ public class AeroportoService {
 		aeroportoRepository.deleteById(id);
 
 	}
+	
+	private void validaDuplicadas(AeroportoDtoCadastro  dados) {
+
+		if (aeroportoRepository.existsByEmail(dados.email())) {
+			throw new ValidacaoException("Email já registrado!");
+		}
+	}
+	
+	private void validaDuplicadas(AeroportoDtoAtualizar dados) {
+		
+
+		if (aeroportoRepository.existsByEmail(dados.email())) {
+			throw new ValidacaoException("Email já registrado!");
+		}
+	}
+	
 }

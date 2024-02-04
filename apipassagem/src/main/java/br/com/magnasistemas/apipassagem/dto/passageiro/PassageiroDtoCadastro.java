@@ -10,7 +10,8 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record PassageiroDtoCadastro(@NotBlank
+public record PassageiroDtoCadastro(
+		@NotBlank
 		@Size(max = 255)
 		String nomeCompleto,
 		

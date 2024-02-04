@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 
 public interface AeroportoRepository extends JpaRepository<Aeroporto, Long>{
 	
+	boolean existsByEmail(String email);
+	
 	@Transactional
 	@Modifying
 	@Query(value = "DELETE FROM tb_aeroporto; ALTER SEQUENCE tb_aeroporto_id_seq RESTART WITH 1", nativeQuery = true)
