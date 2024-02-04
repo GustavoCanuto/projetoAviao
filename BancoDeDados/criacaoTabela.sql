@@ -67,5 +67,6 @@ CREATE TABLE tb_passagem(
     fk_destino INT not null references tb_aeroporto(id),
     fk_aeronave INT not null references tb_aeronave(id),
     valor_passagem decimal not null, 
+    tipo_assento varchar not null, 
   	fk_passageiro INT not null references tb_passageiro(id)
 );
