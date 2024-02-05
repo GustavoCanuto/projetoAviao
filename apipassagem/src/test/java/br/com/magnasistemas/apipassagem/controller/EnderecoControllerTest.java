@@ -149,8 +149,8 @@ public class EnderecoControllerTest {
 	}
 
 	@Test
-	@DisplayName("Deveria listar endereco ")
-	void listarBairrosCenario1() {
+	@DisplayName("Deveria listar ")
+	void listarCenario1() {
 
 		ResponseEntity<PageResponse<EnderecoDtoDetalhar>> responseEntity = restTemplate.exchange(URI_PRINCIPAL,
 				HttpMethod.GET, null, new ParameterizedTypeReference<PageResponse<EnderecoDtoDetalhar>>() {

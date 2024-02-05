@@ -14,6 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import br.com.magnasistemas.apipassagem.entity.Cidade;
 import br.com.magnasistemas.apipassagem.entity.Endereco;
 import br.com.magnasistemas.apipassagem.entity.Estado;
 import br.com.magnasistemas.apipassagem.entity.Pais;
+import br.com.magnasistemas.apipassagem.infra.PageResponse;
 import br.com.magnasistemas.apipassagem.repository.AeroportoRepository;
 import br.com.magnasistemas.apipassagem.repository.CidadeRepository;
 import br.com.magnasistemas.apipassagem.repository.EnderecoRepository;
@@ -78,6 +80,24 @@ public class AeroportoControllerTest {
 		paisRepository.deleteAllAndResetSequence();
 	}
 
+	@Test
+	@DisplayName("Deveria listar ")
+	void listarCenario1() {
+
+		ResponseEntity<PageResponse<AeroportoDtoDetalhar>> responseEntity = restTemplate.exchange(URI_PRINCIPAL,
+				HttpMethod.GET, null, new ParameterizedTypeReference<PageResponse<AeroportoDtoDetalhar>>() {
+				});
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(responseEntity.getBody()).isNotNull();
+
+		PageResponse<AeroportoDtoDetalhar> pageResponse = responseEntity.getBody();
+
+		assertThat(pageResponse.isEmpty()).isFalse();
+		assertThat(pageResponse.getContent()).isNotEmpty();
+		assertThat(pageResponse.getContent().get(0).id()).isEqualTo(1L);
+	}
+	
 	@Test
 	@DisplayName("Deveria cadastrar um aeroporto com informações válidas")
 	void cadastrarCenario1() {
