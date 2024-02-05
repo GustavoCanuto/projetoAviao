@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "ec40f84d-8ca3-45d8-8ced-56d7c2ea7369",
+		"name": "Passageiro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29089140",
+		"_collection_link": "https://crimson-spaceship-325926.postman.co/workspace/apiPassagem~27779356-4d60-4045-b64c-296c971de917/collection/29089140-ec40f84d-8ca3-45d8-8ced-56d7c2ea7369?action=share&source=collection_link&creator=29089140"
+	},
+	"item": [
+		{
+			"name": "Listando Todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/passageiro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"passageiro"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detalhar por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/passageiro/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"passageiro",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrando",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"nomeCompleto\": \"rua teste\",\r\n    \"cpf\": \"12345678905\",\r\n    \"dataNascimento\": \"2000-10-01\",\r\n    \"email\": \"044440408@gmail.com\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/passageiro",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"passageiro"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Cadastro",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/passageiro/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"passageiro",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import br.com.magnasistemas.apipassagem.enums.TipoAssento;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public record PassagemDtoCadastro(
 	
@@ -29,6 +30,7 @@ public record PassagemDtoCadastro(
 	Long idPassageiro,
 	
 	@NotNull 
+	@Positive(message = "O valor deve ser um valor positivo") 
 	Double valorPassagem,
 	
 	@NotNull

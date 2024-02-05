@@ -1,46 +1,45 @@
 {
 	"info": {
-		"_postman_id": "64c57dfc-88b4-42ed-9fec-5dab161ac2b8",
-		"name": "Endereco",
+		"_postman_id": "313bd0a5-317a-452d-b3d6-e335fb2a985e",
+		"name": "Companhia Area",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29089140",
-		"_collection_link": "https://crimson-spaceship-325926.postman.co/workspace/apiPassagem~27779356-4d60-4045-b64c-296c971de917/collection/29089140-64c57dfc-88b4-42ed-9fec-5dab161ac2b8?action=share&source=collection_link&creator=29089140"
+		"_collection_link": "https://crimson-spaceship-325926.postman.co/workspace/apiPassagem~27779356-4d60-4045-b64c-296c971de917/collection/29089140-313bd0a5-317a-452d-b3d6-e335fb2a985e?action=share&source=collection_link&creator=29089140"
 	},
 	"item": [
 		{
-			"name": "Listando Todos Enderecos",
+			"name": "Listando Todos",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/endereco",
+					"raw": "http://localhost:8080/companhia",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"endereco"
+						"companhia"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Listando Todos os Endereco por Id Cidade",
+			"name": "Detalhar por Id",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/endereco/cidade/1",
+					"raw": "http://localhost:8080/companhia/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"endereco",
-						"cidade",
+						"companhia",
 						"1"
 					]
 				}
@@ -48,33 +47,13 @@
 			"response": []
 		},
 		{
-			"name": "Detalhar Endereco por Id",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/endereco/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"endereco",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Cadastrando Endereco",
+			"name": "Cadastrando",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n     \"idCidade\": 1,\r\n\t\"logradouro\": \"rua teste\",\r\n    \"complemento\": \"casa\",\r\n    \"numero\": \"88\",\r\n    \"cep\": \"04444040\"\r\n}\r\n\r\n",
+					"raw": "{\r\n\t\"nome\": \"rua teste\",\r\n    \"cnpj\": \"12345678903\",\r\n    \"email\": \"044440404@gmail.com\"\r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -82,14 +61,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/endereco",
+					"raw": "http://localhost:8080/companhia",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"endereco"
+						"companhia"
 					]
 				}
 			},
@@ -102,7 +81,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n     \"idCidade\": 2,\r\n\t\"logradouro\": \"rua teste\",\r\n    \"complemento\": \"casa\",\r\n    \"numero\": \"88\",\r\n    \"cep\": \"04444040\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -110,14 +89,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/endereco/1",
+					"raw": "http://localhost:8080/companhia/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"endereco",
+						"companhia",
 						"1"
 					]
 				}
@@ -130,14 +109,14 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/endereco/1",
+					"raw": "http://localhost:8080/companhia/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"endereco",
+						"companhia",
 						"1"
 					]
 				}

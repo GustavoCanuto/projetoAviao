@@ -7,6 +7,7 @@ import br.com.magnasistemas.apipassagem.entity.Aeroporto;
 import br.com.magnasistemas.apipassagem.entity.Passageiro;
 import br.com.magnasistemas.apipassagem.entity.Passagem;
 import br.com.magnasistemas.apipassagem.enums.TipoAssento;
+import jakarta.validation.constraints.Positive;
 
 public record PassagemDtoDetalhar(
 		
@@ -32,7 +33,7 @@ public record PassagemDtoDetalhar(
 		
 		Passageiro idPassageiro,
 		
-		
+		@Positive(message = "O valor deve ser um valor positivo") 
 		Double valorPassagem,
 		
 		TipoAssento tipo
