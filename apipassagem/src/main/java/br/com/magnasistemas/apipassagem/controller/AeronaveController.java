@@ -34,11 +34,11 @@ public class AeronaveController {
 	public ResponseEntity<AeronaveDtoDetalhar> cadastrar(@RequestBody @Valid AeronaveDtoCadastro dados,
 			UriComponentsBuilder uriBuilder) {
 
-		var bairro = aeronaveService.cadastrar(dados);
+		var dto = aeronaveService.cadastrar(dados);
 
-		var uri = uriBuilder.path("/aeronave/{id}").buildAndExpand(bairro.id()).toUri();
+		var uri = uriBuilder.path("/aeronave/{id}").buildAndExpand(dto.id()).toUri();
 
-		return ResponseEntity.created(uri).body(bairro);
+		return ResponseEntity.created(uri).body(dto);
 
 	}
 

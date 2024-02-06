@@ -76,7 +76,7 @@ public class EnderecoControllerTest {
 
 	@Test
 	@DisplayName("Deveria cadastrar um endereco com informações válidas")
-	void cadastrarBairroCenario1() {
+	void cadastrarCenario1() {
 
 		EnderecoDtoCadastro requestBody = new EnderecoDtoCadastro(1L, "logradouro teste", "complemento","numero","12345678");
 
@@ -91,7 +91,7 @@ public class EnderecoControllerTest {
 
 	@Test
 	@DisplayName("Deveria manda exception ao usar cidade invalida")
-	void cadastrarBairroCenario2() {
+	void cadastrarCenario2() {
 
 		EnderecoDtoCadastro requestBody = new EnderecoDtoCadastro(15L, "logradouro teste", "complemento","numero","12345678");
 
@@ -104,7 +104,7 @@ public class EnderecoControllerTest {
 
 	@Test
 	@DisplayName("Deveria detalhar um endereco por ID")
-	void detalharBairroPorId() {
+	void detalharPorId() {
 		Long idDoBairroExistente = 1L;
 
 		ResponseEntity<EnderecoDtoDetalhar> responseEntity = restTemplate.exchange(URI_PRINCIPAL + "/{id}", HttpMethod.GET,
@@ -119,29 +119,29 @@ public class EnderecoControllerTest {
 	@ParameterizedTest
 	@MethodSource("parametrosAtualizar")
 	@DisplayName("Deveria atualizar dados")
-	void atualizarBairroPorIdCenario1(Long id, String logradouro, String complemento,String numero,String cep) {
-		Long idDoBairroExistente = 1L;
+	void atualizarPorIdCenario1(Long id, String logradouro, String complemento,String numero,String cep) {
+		Long idExistente = 1L;
 
 		EnderecoDtoCadastro requestBody = new EnderecoDtoCadastro(id,logradouro, complemento,numero,cep);
 
 		ResponseEntity<EnderecoDtoDetalhar> responseEntity = restTemplate.exchange(URI_PRINCIPAL + "/{id}", HttpMethod.PUT,
-				new HttpEntity<>(requestBody), EnderecoDtoDetalhar.class, idDoBairroExistente);
+				new HttpEntity<>(requestBody), EnderecoDtoDetalhar.class, idExistente);
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(responseEntity.getBody()).isNotNull();
-		assertThat(responseEntity.getBody().id()).isEqualTo(idDoBairroExistente);
+		assertThat(responseEntity.getBody().id()).isEqualTo(idExistente);
 
 	}
 
 	@Test
 	@DisplayName("Deveria mandar erro ao tentar atualizar com cidade invalida")
-	void atualizarBairroPorIdCenario2() {
-		Long idDoBairroExistente = 1L;
+	void atualizarPorIdCenario2() {
+		Long idExistente = 1L;
 
 		EnderecoDtoCadastro requestBody = new EnderecoDtoCadastro(15L, "", "complemento","numero","12345678");
 
 		ResponseEntity<String> responseEntity = restTemplate.exchange(URI_PRINCIPAL + "/{id}", HttpMethod.PUT,
-				new HttpEntity<>(requestBody), String.class, idDoBairroExistente);
+				new HttpEntity<>(requestBody), String.class, idExistente);
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 		assertThat(responseEntity.getBody()).isEqualTo("Id da cidade informada não existe!");
@@ -169,13 +169,13 @@ public class EnderecoControllerTest {
 
 	@Test
 	@DisplayName("Deveria listar endereco pelo id da cidade")
-	void listarBairrosPorCidadeCenario1() {
-		Long idCidadeExistente = 1L;
+	void listarPorCidadeCenario1() {
+		Long idExistente = 1L;
 
 		ResponseEntity<PageResponse<EnderecoDtoDetalhar>> responseEntity = restTemplate.exchange(
 				URI_PESQUISA_CIDADE + "/{id}", HttpMethod.GET, null,
 				new ParameterizedTypeReference<PageResponse<EnderecoDtoDetalhar>>() {
-				}, idCidadeExistente);
+				}, idExistente);
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(responseEntity.getBody()).isNotNull();
@@ -190,11 +190,11 @@ public class EnderecoControllerTest {
 
 	@Test
 	@DisplayName("Deveria excluir um endereco por ID")
-	void excluirBairroPorId() {
-		Long idDoBairroExistente = 1L;
+	void excluirPorId() {
+		Long idExistente = 1L;
 
 		ResponseEntity<Void> responseEntity = restTemplate.exchange(URI_PRINCIPAL + "/{id}", HttpMethod.DELETE, null,
-				Void.class, idDoBairroExistente);
+				Void.class, idExistente);
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 	}

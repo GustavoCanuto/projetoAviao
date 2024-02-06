@@ -70,7 +70,7 @@ class CidadeControllerTest {
 
 	@Test
 	@DisplayName("Deveria listar cidades")
-	void listarCidadesCenario1() {
+	void listarCenario1() {
 
 		ResponseEntity<PageResponse<CidadeDtoDetalhar>> responseEntity = restTemplate.exchange(URI_PRINCIPAL,
 				HttpMethod.GET, null, new ParameterizedTypeReference<PageResponse<CidadeDtoDetalhar>>() {
@@ -90,7 +90,7 @@ class CidadeControllerTest {
 	@ValueSource(strings = { "", "cidade" })
 	@ParameterizedTest
 	@DisplayName("Deveria listar cidades com diferentes valores de nome")
-	void listarCidadesCenario2(String nome) {
+	void listarCenario2(String nome) {
 
 		ResponseEntity<PageResponse<CidadeDtoDetalhar>> responseEntity = restTemplate.exchange(URI_PRINCIPAL+ "?nome=" + nome,
 				HttpMethod.GET, null, new ParameterizedTypeReference<PageResponse<CidadeDtoDetalhar>>() {
@@ -108,12 +108,12 @@ class CidadeControllerTest {
 
 	@Test
 	@DisplayName("Deveria listar cidades pelo id do estado")
-	void listarCidadesPorEstadoCenario1() {
-		Long idEstadoExistente = 1L;
+	void listarPorEstadoCenario1() {
+		Long idExistente = 1L;
 
 		ResponseEntity<PageResponse<CidadeDtoDetalhar>> responseEntity = restTemplate.exchange(URI_PESQUISA_ESTADO +"/{id}",
 				HttpMethod.GET, null, new ParameterizedTypeReference<PageResponse<CidadeDtoDetalhar>>() {
-				}, idEstadoExistente);
+				}, idExistente);
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(responseEntity.getBody()).isNotNull();
@@ -129,13 +129,13 @@ class CidadeControllerTest {
 	@ValueSource(strings = { "", "cidade" })
 	@ParameterizedTest
 	@DisplayName("Deveria listar cidades com diferentes valores de nome pelo id do estado")
-	void listarCidadesPorEstadoCenario2(String nome) {
-		Long idEstadoExistente = 1L;
+	void listarPorEstadoCenario2(String nome) {
+		Long idExistente = 1L;
 
 		ResponseEntity<PageResponse<CidadeDtoDetalhar>> responseEntity = restTemplate.exchange(
 				URI_PESQUISA_ESTADO + "/{id}?nome=" + nome, HttpMethod.GET, null,
 				new ParameterizedTypeReference<PageResponse<CidadeDtoDetalhar>>() {
-				}, idEstadoExistente);
+				}, idExistente);
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(responseEntity.getBody()).isNotNull();
@@ -149,15 +149,15 @@ class CidadeControllerTest {
 
 	@Test
 	@DisplayName("Deveria detalhar uma cidade por ID")
-	void detalharCidadePorId() {
-		Long idDoCidadeExistente = 1L;
+	void detalharPorId() {
+		Long idExistente = 1L;
 
 		ResponseEntity<CidadeDtoDetalhar> responseEntity = restTemplate.exchange(URI_PRINCIPAL+"/{id}", HttpMethod.GET, null,
-				CidadeDtoDetalhar.class, idDoCidadeExistente);
+				CidadeDtoDetalhar.class, idExistente);
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(responseEntity.getBody()).isNotNull();
-		assertThat(responseEntity.getBody().id()).isEqualTo(idDoCidadeExistente);
+		assertThat(responseEntity.getBody().id()).isEqualTo(idExistente);
 
 	}
 

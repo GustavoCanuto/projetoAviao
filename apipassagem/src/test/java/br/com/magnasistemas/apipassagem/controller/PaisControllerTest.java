@@ -32,7 +32,7 @@ public class PaisControllerTest {
 
 	@Test
 	@DisplayName("Deveria listar todos os estados")
-	void listarEstadosCenario1() {
+	void listarCenario1() {
 		
 		Pais paisTeste = new Pais("pais teste ", "br");
 

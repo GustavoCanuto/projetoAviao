@@ -34,11 +34,11 @@ public class AeroportoController {
 	public ResponseEntity<AeroportoDtoDetalhar> cadastrar(@RequestBody @Valid AeroportoDtoCadastro dados,
 			UriComponentsBuilder uriBuilder) {
 
-		var bairro = aeroportoService.cadastrar(dados);
+		var dto = aeroportoService.cadastrar(dados);
 
-		var uri = uriBuilder.path("/aeroporto/{id}").buildAndExpand(bairro.id()).toUri();
+		var uri = uriBuilder.path("/aeroporto/{id}").buildAndExpand(dto.id()).toUri();
 
-		return ResponseEntity.created(uri).body(bairro);
+		return ResponseEntity.created(uri).body(dto);
 
 	}
 

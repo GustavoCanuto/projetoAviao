@@ -37,7 +37,7 @@ class EstadoControllerTest {
 
 	@Test
 	@DisplayName("Deveria listar todos os estados")
-	void listarEstadosCenario1() {
+	void listarCenario1() {
 		
 		Pais paisTeste = new Pais("pais teste", "br");
 		Estado estadoTeste = new Estado("estado teste ", "uf",paisTeste);

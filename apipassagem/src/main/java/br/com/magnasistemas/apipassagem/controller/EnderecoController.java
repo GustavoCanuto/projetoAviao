@@ -33,11 +33,11 @@ public class EnderecoController {
 	public ResponseEntity<EnderecoDtoDetalhar> cadastrar(@RequestBody @Valid EnderecoDtoCadastro dados,
 			UriComponentsBuilder uriBuilder) {
 
-		var bairro = enderecoService.cadastrarEndereco(dados);
+		var dto = enderecoService.cadastrarEndereco(dados);
 
-		var uri = uriBuilder.path("/endereco/{id}").buildAndExpand(bairro.id()).toUri();
+		var uri = uriBuilder.path("/endereco/{id}").buildAndExpand(dto.id()).toUri();
 
-		return ResponseEntity.created(uri).body(bairro);
+		return ResponseEntity.created(uri).body(dto);
 
 	}
 
