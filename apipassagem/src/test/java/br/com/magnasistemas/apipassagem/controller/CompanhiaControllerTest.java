@@ -111,7 +111,9 @@ public class CompanhiaControllerTest {
 
 		CompanhiaAereaDtoAtualizar requestBody = new CompanhiaAereaDtoAtualizar(nome, cnpj, email);
 
-		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URI_PRINCIPAL + "/1", HttpMethod.PUT,
+				new HttpEntity<>(requestBody), String.class, 1);
+				
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 		assertThat(responseEntity.getBody()).isNotNull();

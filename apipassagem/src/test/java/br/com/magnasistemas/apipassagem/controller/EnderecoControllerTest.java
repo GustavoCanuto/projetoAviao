@@ -75,6 +75,19 @@ public class EnderecoControllerTest {
 	}
 
 	@Test
+	@DisplayName("Deveria retornar 500")
+	void erro500() {
+
+		Long idNaoExistente = 15L;
+
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URI_PESQUISA_CIDADE + "?nome", HttpMethod.GET, null,
+				String.class, idNaoExistente);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+
+	}
+	
+	@Test
 	@DisplayName("Deveria cadastrar um endereco com informações válidas")
 	void cadastrarCenario1() {
 

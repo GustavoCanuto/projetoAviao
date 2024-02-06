@@ -24,8 +24,6 @@ import org.springframework.test.context.ActiveProfiles;
 import br.com.magnasistemas.apipassagem.dto.aeroporto.AeroportoDtoAtualizar;
 import br.com.magnasistemas.apipassagem.dto.aeroporto.AeroportoDtoCadastro;
 import br.com.magnasistemas.apipassagem.dto.aeroporto.AeroportoDtoDetalhar;
-import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoAtualizar;
-import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoCadastro;
 import br.com.magnasistemas.apipassagem.entity.Aeroporto;
 import br.com.magnasistemas.apipassagem.entity.Cidade;
 import br.com.magnasistemas.apipassagem.entity.Endereco;
@@ -114,6 +112,20 @@ public class AeroportoControllerTest {
 
 	}
 	
+	@Test
+	@DisplayName("Nao Deveria cadastrar com badRequest")
+	void erro400() {
+
+		AeroportoDtoCadastro requestBody = new AeroportoDtoCadastro(1L, "aeroprto teste2", "teste2");
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody,
+				String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		
+
+	}
+	
 	@ParameterizedTest
 	@MethodSource("parametrosCadastroInvalido")
 	@DisplayName("Não Deveria cadastrar")
@@ -136,7 +148,9 @@ public class AeroportoControllerTest {
 
 		AeroportoDtoAtualizar requestBody = new AeroportoDtoAtualizar(endereco, nome, email);
 
-		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URI_PRINCIPAL + "/1", HttpMethod.PUT,
+				new HttpEntity<>(requestBody), String.class, 1);
+				
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 		assertThat(responseEntity.getBody()).isNotNull();

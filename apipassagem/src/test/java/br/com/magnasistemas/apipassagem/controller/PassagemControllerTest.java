@@ -253,4 +253,62 @@ public class PassagemControllerTest {
 		return cidadeTeste;
 	}
 
+	@Test
+	@DisplayName("Deveria retornar 404 com id invalido ")
+	void erro404() {
+
+		Long idNaoExistente = 15L;
+
+		ResponseEntity<String> responseEntity = restTemplate.exchange(URI_PRINCIPAL + "/{id}", HttpMethod.GET, null,
+				String.class, idNaoExistente);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+
+	}
+
+	@ParameterizedTest
+	@MethodSource("parametrosIdInvalido")
+	@DisplayName("Deveria manda exception ao usar id entidade invalido")
+	void cadastrarCenario2(Long idOrigem, Long idDestino, Long aeronave, Long passageiro ) {
+
+		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+				LocalDateTime.of(2023, 10, 3, 15, 30), idOrigem, idDestino, aeronave, passageiro, 200D, TipoAssento.ECONOMICO);
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	
+
+	}
+	
+	static Stream<Arguments> parametrosIdInvalido() {
+		return Stream.of(
+
+				Arguments.of(15L, 2L, 1L, 1L),
+
+				Arguments.of(1L, 25L, 1L, 1L),
+				
+				Arguments.of(1L, 2L, 15L, 1L),
+
+				Arguments.of(1L, 2L, 1L, 15L)
+				
+				);
+	}
+	
+	@Test
+	@DisplayName("Não Deveria excluir  se existe entidade vinculada")
+	void excluirInvalidoRegistrada() {
+
+		Long idExistente = 1L;
+
+		ResponseEntity<String> responseEntity = restTemplate.exchange("/endereco/{id}", HttpMethod.DELETE, null,
+				String.class, idExistente);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody())
+				.contains("Não é possível excluir devido existir outra entidade vinculada a essa.");
+	}
+	
+
 }

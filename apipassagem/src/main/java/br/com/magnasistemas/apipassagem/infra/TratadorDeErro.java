@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.com.magnasistemas.apipassagem.validacoes.ValidacaoException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 @RestControllerAdvice
 public class TratadorDeErro {
@@ -24,12 +23,7 @@ public class TratadorDeErro {
 		return ResponseEntity.notFound().build();
 
 	}
-	
-	
-	@ExceptionHandler(NoHandlerFoundException.class)
-	public ResponseEntity<String> tratarErro404NaoEncontrado(NoHandlerFoundException ex) {
-	    return ResponseEntity.notFound().build();
-	}
+
 
 	@ExceptionHandler(ValidacaoException.class)
 	public ResponseEntity<String> tratarErroRegraDeNegocio(ValidacaoException ex) {
