@@ -35,8 +35,6 @@ public class CompanhiaControllerTest {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
-
-
 	@Autowired
 	private CompanhiaAereaRepository companhiaAereaRepository;
 
@@ -75,21 +73,58 @@ public class CompanhiaControllerTest {
 		assertThat(pageResponse.getContent()).isNotEmpty();
 		assertThat(pageResponse.getContent().get(0).id()).isEqualTo(1L);
 	}
-	
+
 	@Test
 	@DisplayName("Deveria cadastrar uma companhia com informações válidas")
 	void cadastrarCenario1() {
 
-		CompanhiaAereaDtoCadastro requestBody = new CompanhiaAereaDtoCadastro("nome", "12345678901", "teste2@gmail.com");
+		CompanhiaAereaDtoCadastro requestBody = new CompanhiaAereaDtoCadastro("nome", "12345678901",
+				"teste2@gmail.com");
 
-		ResponseEntity<CompanhiaAereaDtoDetalhar> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody,
-				CompanhiaAereaDtoDetalhar.class);
+		ResponseEntity<CompanhiaAereaDtoDetalhar> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL,
+				requestBody, CompanhiaAereaDtoDetalhar.class);
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(responseEntity.getBody()).isNotNull();
 
 	}
 
+	@ParameterizedTest
+	@MethodSource("parametrosCadastroInvalido")
+	@DisplayName("Não Deveria cadastrar")
+	void cadastrarInvalidoCenario1(String nome, String cnpj, String email, String mensagemDeErro) {
+
+		CompanhiaAereaDtoCadastro requestBody = new CompanhiaAereaDtoCadastro(nome, cnpj, email);
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody()).contains(mensagemDeErro);
+
+	}
+	
+	@ParameterizedTest
+	@MethodSource("parametrosCadastroInvalido")
+	@DisplayName("Não Deveria atualizar")
+	void atualizarInvalidoCenario1(String nome, String cnpj, String email, String mensagemDeErro) {
+
+		CompanhiaAereaDtoAtualizar requestBody = new CompanhiaAereaDtoAtualizar(nome, cnpj, email);
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody()).contains(mensagemDeErro);
+
+	}
+
+	static Stream<Arguments> parametrosCadastroInvalido() {
+		return Stream.of(Arguments.of("nome", "12345678902", "teste2@gmail.com", "Cnpj já registrado!"),
+				Arguments.of("nome", "12345678903", "teste@gmail.com", "Email já registrado!")
+
+		);
+	}
 
 	@Test
 	@DisplayName("Deveria detalhar por ID")
@@ -107,7 +142,7 @@ public class CompanhiaControllerTest {
 	@ParameterizedTest
 	@MethodSource("parametrosAtualizar")
 	@DisplayName("Deveria atualizar dados")
-	void atualizarCenario1(String var1, String var2,String var3) {
+	void atualizarCenario1(String var1, String var2, String var3) {
 
 		Long idExistente = 1L;
 
@@ -123,9 +158,8 @@ public class CompanhiaControllerTest {
 	}
 
 	static Stream<Arguments> parametrosAtualizar() {
-		return Stream.of(Arguments.of("nome", "112345678901", "teste2@gmail.com"), 
-				Arguments.of(null, "112345678901", "teste2@gmail.com"),
-				Arguments.of("nome", null, null)
+		return Stream.of(Arguments.of("nome", "112345678901", "teste2@gmail.com"),
+				Arguments.of(null, "112345678901", "teste2@gmail.com"), Arguments.of("nome", null, null)
 
 		);
 	}

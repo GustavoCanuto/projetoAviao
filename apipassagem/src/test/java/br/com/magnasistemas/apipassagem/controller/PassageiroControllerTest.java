@@ -3,11 +3,15 @@ package br.com.magnasistemas.apipassagem.controller;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -83,6 +87,30 @@ public class PassageiroControllerTest {
 
 	}
 
+	@ParameterizedTest
+	@MethodSource("parametrosCadastroInvalido")
+	@DisplayName("Não Deveria cadastrar aeronave")
+	void cadastrarInvalidoCenario1(String nomeCompleto, String cpf, LocalDate dataNascimento, String email, String mensagemDeErro) {
+
+		PassageiroDtoCadastro requestBody = new PassageiroDtoCadastro(nomeCompleto, cpf, dataNascimento, email);
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody()).contains(mensagemDeErro);
+
+	}
+
+	static Stream<Arguments> parametrosCadastroInvalido() {
+		return Stream.of(
+				Arguments.of("nome", "44844444444", LocalDate.of(2023, 10, 2), "teste2@gmail.com",
+						"Cpf já registrado!"),
+				Arguments.of("nome", "44844444449", LocalDate.of(2023, 10, 2), "teste@gmail.com",
+						"Email já registrado!")
+
+		);
+	}
 
 	@Test
 	@DisplayName("Deveria detalhar por ID")

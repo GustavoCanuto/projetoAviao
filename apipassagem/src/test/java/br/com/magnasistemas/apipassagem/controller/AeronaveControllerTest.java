@@ -96,6 +96,29 @@ public class AeronaveControllerTest {
 		assertThat(responseEntity.getBody()).isNotNull();
 
 	}
+	
+	@ParameterizedTest
+	@MethodSource("parametrosCadastroInvalido")
+	@DisplayName("Não Deveria cadastrar aeronave")
+	void cadastrarInvalidoCenario1(Long companhia, Long qtdAssentoEconomico, Long qtdAssentoVip, String nsa, String modelo, String mensagemDeErro) {
+
+		AeronaveDtoCadastro requestBody = new AeronaveDtoCadastro(companhia, qtdAssentoEconomico,  qtdAssentoVip, nsa,  modelo);
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody()).contains(mensagemDeErro);
+
+	}
+
+	static Stream<Arguments> parametrosCadastroInvalido() {
+		return Stream.of(
+				Arguments.of(1L, 20L, 25L, "nsa", "MODELO",
+						"Nsa já registrado!")
+
+		);
+	}
 
 	@Test
 	@DisplayName("Deveria manda exception ao usar companhia invalido")

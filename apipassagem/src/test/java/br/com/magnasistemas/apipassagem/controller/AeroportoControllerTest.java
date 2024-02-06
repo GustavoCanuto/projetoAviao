@@ -24,6 +24,8 @@ import org.springframework.test.context.ActiveProfiles;
 import br.com.magnasistemas.apipassagem.dto.aeroporto.AeroportoDtoAtualizar;
 import br.com.magnasistemas.apipassagem.dto.aeroporto.AeroportoDtoCadastro;
 import br.com.magnasistemas.apipassagem.dto.aeroporto.AeroportoDtoDetalhar;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoAtualizar;
+import br.com.magnasistemas.apipassagem.dto.companhia.CompanhiaAereaDtoCadastro;
 import br.com.magnasistemas.apipassagem.entity.Aeroporto;
 import br.com.magnasistemas.apipassagem.entity.Cidade;
 import br.com.magnasistemas.apipassagem.entity.Endereco;
@@ -110,6 +112,44 @@ public class AeroportoControllerTest {
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(responseEntity.getBody()).isNotNull();
 
+	}
+	
+	@ParameterizedTest
+	@MethodSource("parametrosCadastroInvalido")
+	@DisplayName("Não Deveria cadastrar")
+	void cadastrarInvalidoCenario1(Long endereco, String nome, String email, String mensagemDeErro) {
+
+		AeroportoDtoCadastro requestBody = new AeroportoDtoCadastro(endereco, nome, email);
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody()).contains(mensagemDeErro);
+
+	}
+	
+	@ParameterizedTest
+	@MethodSource("parametrosCadastroInvalido")
+	@DisplayName("Não Deveria atualizar")
+	void atualizarInvalidoCenario1(Long endereco, String nome, String email, String mensagemDeErro) {
+
+		AeroportoDtoAtualizar requestBody = new AeroportoDtoAtualizar(endereco, nome, email);
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody()).contains(mensagemDeErro);
+
+	}
+
+	static Stream<Arguments> parametrosCadastroInvalido() {
+		return Stream.of(
+				Arguments.of(1L, "aeroprto teste2", "teste@gmail.com", "Email já registrado!")
+	
+
+		);
 	}
 	
 	@Test

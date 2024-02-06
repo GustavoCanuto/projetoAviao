@@ -4,11 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -50,22 +54,22 @@ public class PassagemControllerTest {
 
 	@Autowired
 	private PaisRepository paisRepository;
-	
+
 	@Autowired
 	private EstadoRepository estadoRepository;
 
 	@Autowired
 	private CidadeRepository cidadeRepository;
- 
+
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	private PassageiroRepository passageiroRepository;
-	
+
 	@Autowired
 	private AeroportoRepository aeroportoRepository;
-	
+
 	@Autowired
 	private AeronaveRepository aeronaveRepository;
 
@@ -74,34 +78,36 @@ public class PassagemControllerTest {
 
 	@Autowired
 	private PassagemRepository passagemRepository;
-	
+
 	private final String URI_PRINCIPAL = "/passagem";
 
 	@BeforeEach
 	void inicializar() {
 
-		Endereco enderecoTeste = new Endereco("logradouro teste", "numero","complemento","12345678", criarCidade());
-		Aeroporto aeroportoTesteOrigem = new Aeroporto( "aeroprto teste", "teste@gmail.com", enderecoTeste);
-		Aeroporto aeroportoTesteDestino = new Aeroporto( "aeroprto teste2", "teste2@gmail.com", enderecoTeste);
-		
+		Endereco enderecoTeste = new Endereco("logradouro teste", "numero", "complemento", "12345678", criarCidade());
+		Aeroporto aeroportoTesteOrigem = new Aeroporto("aeroprto teste", "teste@gmail.com", enderecoTeste);
+		Aeroporto aeroportoTesteDestino = new Aeroporto("aeroprto teste2", "teste2@gmail.com", enderecoTeste);
+
 		enderecoRepository.save(enderecoTeste);
 		aeroportoRepository.save(aeroportoTesteOrigem);
 		aeroportoRepository.save(aeroportoTesteDestino);
-		
 
 		CompanhiaAerea companhiaTeste = new CompanhiaAerea("nome", "04444040", "teste@gmail.com");
-		Aeronave aeronaveTeste = new Aeronave(companhiaTeste, 15L, 20l, "nsa", "aviao");
+		Aeronave aeronaveTeste = new Aeronave(companhiaTeste, 15L, 20L, "nsa", "aviao");
+		Aeronave aeronaveTesteSemAssento = new Aeronave(companhiaTeste, 0L, 0L, "nsa", "aviao");
 
 		companhiaAereaRepository.save(companhiaTeste);
 		aeronaveRepository.save(aeronaveTeste);
-		
-		Passageiro passageiroTeste = new Passageiro("nome", "44844444444", LocalDate.of(2023, 10, 2), "teste@gmail.com");
+		aeronaveRepository.save(aeronaveTesteSemAssento);
+
+		Passageiro passageiroTeste = new Passageiro("nome", "44844444444", LocalDate.of(2023, 10, 2),
+				"teste@gmail.com");
 
 		passageiroRepository.save(passageiroTeste);
-		
-		Passagem passagemTeste =  new Passagem(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-				LocalDateTime.of(2023, 10, 3, 15, 30), aeroportoTesteOrigem, aeroportoTesteDestino, aeronaveTeste,
-				passageiroTeste, 200D, TipoAssento.ECONOMICO);
+
+		Passagem passagemTeste = new Passagem(LocalDateTime.of(2023, 10, 1, 15, 30),
+				LocalDateTime.of(2023, 10, 2, 15, 30), LocalDateTime.of(2023, 10, 3, 15, 30), aeroportoTesteOrigem,
+				aeroportoTesteDestino, aeronaveTeste, passageiroTeste, 200D, TipoAssento.ECONOMICO);
 
 		passagemRepository.save(passagemTeste);
 	}
@@ -139,14 +145,16 @@ public class PassagemControllerTest {
 		assertThat(pageResponse.getContent()).isNotEmpty();
 		assertThat(pageResponse.getContent().get(0).id()).isEqualTo(1L);
 	}
-	
-	@Test
-	@DisplayName("Deveria cadastrar uma passagem com informações válidas")
-	void cadastrarCenario1() {
 
-		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-				LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L,
-				1L, 200D, TipoAssento.ECONOMICO);
+	@ParameterizedTest
+	@MethodSource("parametrosCadastrar")
+	@DisplayName("Deveria cadastrar uma passagem com informações válidas")
+	void cadastrarCenario1(LocalDateTime timestampCompra, LocalDateTime timestampPartida,
+			LocalDateTime timestampChegada, Long idOrigem, Long idDestino, Long idAeronave, Long idPassageiro,
+			Double valorPassagem, TipoAssento tipoAssento) {
+
+		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(timestampCompra, timestampPartida, timestampChegada,
+				idOrigem, idDestino, idAeronave, idPassageiro, valorPassagem, tipoAssento);
 
 		ResponseEntity<PassagemDtoDetalhar> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody,
 				PassagemDtoDetalhar.class);
@@ -156,6 +164,57 @@ public class PassagemControllerTest {
 
 	}
 
+	static Stream<Arguments> parametrosCadastrar() {
+		return Stream.of(
+				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.ECONOMICO),
+				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.VIP)
+
+		);
+	}
+
+	@ParameterizedTest
+	@MethodSource("parametrosCadastroInvalido")
+	@DisplayName("Não Deveria cadastrar passagem")
+	void cadastrarInvalidoCenario1(LocalDateTime timestampCompra, LocalDateTime timestampPartida,
+			LocalDateTime timestampChegada, Long idOrigem, Long idDestino, Long idAeronave, Long idPassageiro,
+			Double valorPassagem, TipoAssento tipoAssento, String mensagemDeErro) {
+
+		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(timestampCompra, timestampPartida, timestampChegada,
+				idOrigem, idDestino, idAeronave, idPassageiro, valorPassagem, tipoAssento);
+
+		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
+
+		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody()).contains(mensagemDeErro);
+
+	}
+
+	static Stream<Arguments> parametrosCadastroInvalido() {
+		return Stream.of(
+				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+						LocalDateTime.of(2023, 10, 2, 15, 28), 1L, 2L, 1L, 1L, 200D, TipoAssento.ECONOMICO,
+						"A chegada prevista deve ser em uma data/horário após a partida"),
+				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+						LocalDateTime.of(2023, 10, 2, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.ECONOMICO,
+						"A chegada prevista deve ser em uma data/horário após a partida"),
+				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 1, 15, 25),
+						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.VIP,
+						"A data/horário da compra deve ser antes da data/horário da partida"),
+				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 1, 15, 30),
+						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.VIP,
+						"A data/horário da compra deve ser antes da data/horário da partida"),
+				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 1L, 1L, 1L, 200D, TipoAssento.ECONOMICO,
+						"O Aeroporto de destino tem que ser diferente do de origem"),
+				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
+						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 2L, 1L, 200D, TipoAssento.ECONOMICO,
+						"Não há assentos disponvieis para essa categoria")
+
+		);
+	}
 
 	@Test
 	@DisplayName("Deveria detalhar por ID")
@@ -169,7 +228,6 @@ public class PassagemControllerTest {
 		assertThat(responseEntity.getBody()).isNotNull();
 
 	}
-
 
 	@Test
 	@DisplayName("Deveria excluir  por ID")
@@ -194,5 +252,5 @@ public class PassagemControllerTest {
 
 		return cidadeTeste;
 	}
-	
+
 }
