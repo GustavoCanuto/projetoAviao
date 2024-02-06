@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
+import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoAtualizar;
 import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoCadastro;
 import br.com.magnasistemas.apipassagem.dto.endereco.EnderecoDtoDetalhar;
 import br.com.magnasistemas.apipassagem.entity.Cidade;
@@ -135,7 +136,7 @@ public class EnderecoControllerTest {
 	void atualizarPorIdCenario1(Long id, String logradouro, String complemento,String numero,String cep) {
 		Long idExistente = 1L;
 
-		EnderecoDtoCadastro requestBody = new EnderecoDtoCadastro(id,logradouro, complemento,numero,cep);
+		EnderecoDtoAtualizar requestBody = new EnderecoDtoAtualizar(id,logradouro, complemento,numero,cep);
 
 		ResponseEntity<EnderecoDtoDetalhar> responseEntity = restTemplate.exchange(URI_PRINCIPAL + "/{id}", HttpMethod.PUT,
 				new HttpEntity<>(requestBody), EnderecoDtoDetalhar.class, idExistente);

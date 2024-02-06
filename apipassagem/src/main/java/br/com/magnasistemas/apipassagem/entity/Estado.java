@@ -37,9 +37,6 @@ public class Estado {
 		return pais;
 	}
 
-	public List<Cidade> getCidade() {
-		return cidade;
-	}
 
 	public Estado() {
 
