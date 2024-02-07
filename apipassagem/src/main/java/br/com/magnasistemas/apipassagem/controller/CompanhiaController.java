@@ -27,14 +27,14 @@ import jakarta.validation.Valid;
 public class CompanhiaController {
 
 	@Autowired
-	private CompanhiaService aeroportoService;
+	private CompanhiaService companhiaService;
 
 	@PostMapping
 	@Transactional
 	public ResponseEntity<CompanhiaAereaDtoDetalhar> cadastrar(@RequestBody @Valid CompanhiaAereaDtoCadastro dados,
 			UriComponentsBuilder uriBuilder) {
 
-		var dto = aeroportoService.cadastrar(dados);
+		var dto = companhiaService.cadastrar(dados);
 
 		var uri = uriBuilder.path("/companhia/{id}").buildAndExpand(dto.id()).toUri();
 
@@ -46,14 +46,14 @@ public class CompanhiaController {
 	public ResponseEntity<Page<CompanhiaAereaDtoDetalhar>> listar(
 			@PageableDefault(size = 10) Pageable paginacao) {
 
-		return ResponseEntity.ok(aeroportoService.listar(paginacao));
+		return ResponseEntity.ok(companhiaService.listar(paginacao));
 
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<CompanhiaAereaDtoDetalhar> detalhar(@PathVariable Long id) {
 
-		return ResponseEntity.ok(aeroportoService.detalhar(id));
+		return ResponseEntity.ok(companhiaService.detalhar(id));
 	}
 
 
@@ -61,7 +61,7 @@ public class CompanhiaController {
 	@Transactional
 	public ResponseEntity<CompanhiaAereaDtoDetalhar> atualizar(@PathVariable Long id, @RequestBody CompanhiaAereaDtoAtualizar dados) {
 
-		return ResponseEntity.ok(aeroportoService.atualizarCadastro(dados, id));
+		return ResponseEntity.ok(companhiaService.atualizarCadastro(dados, id));
 
 	}
 
@@ -69,7 +69,7 @@ public class CompanhiaController {
 	@Transactional
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 
-		aeroportoService.deletaCadastro(id);
+		companhiaService.deletaCadastro(id);
 
 		return ResponseEntity.noContent().build();
 	}

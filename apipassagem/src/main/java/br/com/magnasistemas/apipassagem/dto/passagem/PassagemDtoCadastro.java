@@ -8,8 +8,6 @@ import jakarta.validation.constraints.Positive;
 
 public record PassagemDtoCadastro(
 	
-	@NotNull 
-	LocalDateTime timestampCompra,
 	
 	@NotNull 
 	LocalDateTime timestampPartida,
@@ -25,9 +23,6 @@ public record PassagemDtoCadastro(
 	
 	@NotNull 
 	Long idAeronave,
-
-	@NotNull 
-	Long idPassageiro,
 	
 	@NotNull 
 	@Positive(message = "O valor deve ser um valor positivo") 

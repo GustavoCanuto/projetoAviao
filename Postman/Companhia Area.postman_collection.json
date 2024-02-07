@@ -53,7 +53,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"nome\": \"rua teste\",\r\n    \"cnpj\": \"12345678903\",\r\n    \"email\": \"044440404@gmail.com\"\r\n}\r\n\r\n",
+					"raw": "{\r\n\t\"nome\": \"companhia1\",\r\n    \"cnpj\": \"12345678903\",\r\n    \"email\": \"044440404@gmail.com\"\r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"

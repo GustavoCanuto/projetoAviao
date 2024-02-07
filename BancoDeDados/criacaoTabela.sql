@@ -60,7 +60,7 @@ CREATE TABLE tb_passageiro(
 
 CREATE TABLE tb_passagem(
     id bigserial PRIMARY KEY,
-    timestamp_compra  TIMESTAMP not null, 
+    timestamp_compra  TIMESTAMP , 
     timestamp_partida TIMESTAMP not null, 
     timestamp_chegada TIMESTAMP not null, 
    	fk_origem  INT not null references tb_aeroporto(id), 
@@ -68,5 +68,5 @@ CREATE TABLE tb_passagem(
     fk_aeronave INT not null references tb_aeronave(id),
     valor_passagem decimal not null, 
     tipo_assento varchar not null, 
-  	fk_passageiro INT not null references tb_passageiro(id)
+  	fk_passageiro INT references tb_passageiro(id)
 );

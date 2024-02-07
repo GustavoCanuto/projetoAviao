@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.magnasistemas.apipassagem.dto.passagem.PassagemDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.passagem.PassagemDtoComprar;
 import br.com.magnasistemas.apipassagem.dto.passagem.PassagemDtoDetalhar;
 import br.com.magnasistemas.apipassagem.entity.Aeronave;
 import br.com.magnasistemas.apipassagem.entity.Aeroporto;
@@ -17,9 +18,10 @@ import br.com.magnasistemas.apipassagem.repository.PassagemRepository;
 import br.com.magnasistemas.apipassagem.service.buscador.BuscarAeronave;
 import br.com.magnasistemas.apipassagem.service.buscador.BuscarAeroporto;
 import br.com.magnasistemas.apipassagem.service.buscador.BuscarPassageiro;
+import br.com.magnasistemas.apipassagem.validacoes.comprarPassagem.ValidarCompraPassagem;
 import br.com.magnasistemas.apipassagem.validacoes.passagem.ValidarCadastroPassagem;
 
-@Service
+@Service 
 public class PassagemService {
 
 	@Autowired
@@ -36,17 +38,36 @@ public class PassagemService {
 	
 	@Autowired
 	private List<ValidarCadastroPassagem> validadoresCadastro;
+	
+	@Autowired
+	private List<ValidarCompraPassagem> validadoresCompra;
 
 	public PassagemDtoDetalhar cadastrar(PassagemDtoCadastro dados) {
 
 		Aeronave aeronave = getAeronave.buscar(dados.idAeronave());
 		Aeroporto aeroportoOrigem = getAeroporto.buscar(dados.idOrigem());
 		Aeroporto aeroportoDestino = getAeroporto.buscar(dados.idDestino());
-		Passageiro passageiro = getPassageiro.buscar(dados.idPassageiro());
+		//Passageiro passageiro = getPassageiro.buscar(dados.idPassageiro());
 
 		validadoresCadastro.forEach(v -> v.validar(dados));
 		
-		Passagem passagem = new Passagem(dados, aeroportoOrigem, aeroportoDestino, aeronave, passageiro);
+		Passagem passagem = new Passagem(dados, aeroportoOrigem, aeroportoDestino, aeronave);
+
+		passagemRepository.save(passagem);
+
+		return new PassagemDtoDetalhar(passagem);
+
+	}
+	
+	public PassagemDtoDetalhar comprarPassagem(PassagemDtoComprar dados, Long id) {
+
+		Passagem passagem = passagemRepository.getReferenceById(id);
+		
+		Passageiro passageiro = getPassageiro.buscar(dados.idPassageiro());
+
+		validadoresCompra.forEach(v -> v.validar(dados, id));
+		
+		passagem.comprarPassagem(dados, passageiro);
 
 		passagemRepository.save(passagem);
 
@@ -59,6 +80,20 @@ public class PassagemService {
 		return passagemRepository.findAll(paginacao).map(PassagemDtoDetalhar::new);
 
 	}
+	
+	
+	public Page<PassagemDtoDetalhar> listarPassagemDisponivel(Pageable paginacao, Long idOrigem, Long idDestino) {
+
+		if (idOrigem != null && idDestino != null) { 
+			
+			return passagemRepository.findAvailablePassagens(paginacao,idOrigem,idDestino).map(PassagemDtoDetalhar::new);
+
+		}
+		
+		return passagemRepository.findAll(paginacao).map(PassagemDtoDetalhar::new);
+
+	}
+	
 
 	public PassagemDtoDetalhar detalhar(Long id) {
 

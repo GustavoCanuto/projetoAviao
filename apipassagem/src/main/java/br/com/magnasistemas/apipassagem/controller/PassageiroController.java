@@ -25,14 +25,14 @@ import jakarta.validation.Valid;
 public class PassageiroController {
 
 	@Autowired
-	private PassageiroService aeroportoService;
+	private PassageiroService passageiroService;
 
 	@PostMapping
 	@Transactional
 	public ResponseEntity<PassageiroDtoDetalhar> cadastrar(@RequestBody @Valid PassageiroDtoCadastro dados,
 			UriComponentsBuilder uriBuilder) {
 
-		var dto = aeroportoService.cadastrar(dados);
+		var dto = passageiroService.cadastrar(dados);
 
 		var uri = uriBuilder.path("/passageiro/{id}").buildAndExpand(dto.id()).toUri();
 
@@ -44,14 +44,14 @@ public class PassageiroController {
 	public ResponseEntity<Page<PassageiroDtoDetalhar>> listar(
 			@PageableDefault(size = 10) Pageable paginacao) {
 
-		return ResponseEntity.ok(aeroportoService.listar(paginacao));
+		return ResponseEntity.ok(passageiroService.listar(paginacao));
 
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<PassageiroDtoDetalhar> detalhar(@PathVariable Long id) {
 
-		return ResponseEntity.ok(aeroportoService.detalhar(id));
+		return ResponseEntity.ok(passageiroService.detalhar(id));
 	}
 
 
@@ -60,7 +60,7 @@ public class PassageiroController {
 	@Transactional
 	public ResponseEntity<Void> excluir(@PathVariable Long id) {
 
-		aeroportoService.deletaCadastro(id);
+		passageiroService.deletaCadastro(id);
 
 		return ResponseEntity.noContent().build();
 	}

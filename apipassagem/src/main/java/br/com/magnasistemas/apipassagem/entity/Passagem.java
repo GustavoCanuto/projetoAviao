@@ -3,6 +3,7 @@ package br.com.magnasistemas.apipassagem.entity;
 import java.time.LocalDateTime;
 
 import br.com.magnasistemas.apipassagem.dto.passagem.PassagemDtoCadastro;
+import br.com.magnasistemas.apipassagem.dto.passagem.PassagemDtoComprar;
 import br.com.magnasistemas.apipassagem.enums.TipoAssento;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -49,23 +50,20 @@ public class Passagem {
 	@JoinColumn(name = "fk_passageiro")
 	private Passageiro idPassageiro;
 
-	public Passagem(PassagemDtoCadastro dados, Aeroporto idOrigem, Aeroporto idDestino, Aeronave idAeronave,
-			Passageiro idPassageiro) {
+	public Passagem(PassagemDtoCadastro dados, Aeroporto idOrigem, Aeroporto idDestino, Aeronave idAeronave) {
 
-		this.timestampCompra = dados.timestampCompra();
 		this.timestampPartida = dados.timestampPartida();
 		this.timestampChegada = dados.timestampChegada();
 		this.idOrigem = idOrigem;
 		this.idDestino = idDestino;
 		this.idAeronave = idAeronave;
-		this.idPassageiro = idPassageiro;
 		this.valorPassagem = dados.valorPassagem();
 		this.tipoAssento = dados.tipo();
 	}
 
 	public Passagem(LocalDateTime timestampCompra, LocalDateTime timestampPartida, LocalDateTime timestampChegada,
-			Aeroporto idOrigem, Aeroporto idDestino, Aeronave idAeronave, Passageiro idPassageiro,
-			Double valorPassagem,TipoAssento tipoAssento) {
+			Aeroporto idOrigem, Aeroporto idDestino, Aeronave idAeronave, Passageiro idPassageiro, Double valorPassagem,
+			TipoAssento tipoAssento) {
 
 		this.timestampCompra = timestampCompra;
 		this.timestampPartida = timestampPartida;
@@ -120,6 +118,13 @@ public class Passagem {
 
 	public TipoAssento getTipoAssento() {
 		return tipoAssento;
+	}
+
+	public void comprarPassagem(PassagemDtoComprar dados, Passageiro passageiro) {
+
+		this.timestampCompra = dados.timestampCompra();
+		this.idPassageiro = passageiro;
+
 	}
 
 }

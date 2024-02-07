@@ -27,6 +27,35 @@
 			"response": []
 		},
 		{
+			"name": "Listando Passagem disponiveis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/passagem?idOrigem=1&idDestino=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"passagem"
+					],
+					"query": [
+						{
+							"key": "idOrigem",
+							"value": "1"
+						},
+						{
+							"key": "idDestino",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Detalhar por Id",
 			"request": {
 				"method": "GET",
@@ -53,7 +82,35 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"timestampCompra\": \"2023-08-29T05:00:00\",\r\n    \"timestampPartida\": \"2023-08-29T05:00:00\",\r\n    \"timestampChegada\": \"2023-08-29T05:00:00\",\r\n    \"idOrigem\": 1,\r\n    \"idDestino\": 1,\r\n    \"idAeronave\": 1,\r\n    \"idPassageiro\": 1,\r\n    \"valorPassagem\": 50,\r\n    \"tipo\": \"ECONOMICO\"\r\n}\r\n\r\n",
+					"raw": "{\r\n    \"timestampPartida\": \"2025-08-29T08:06:00\",\r\n    \"timestampChegada\": \"2025-08-29T11:07:00\",\r\n    \"idOrigem\": 1,\r\n    \"idDestino\": 2,\r\n    \"idAeronave\": 1,\r\n    \"valorPassagem\": 50,\r\n    \"tipo\": \"ECONOMICO\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/passagem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"passagem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comprar Passagem",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"timestampCompra\": \"2023-08-29T05:00:00\",\r\n    \"idPassageiro\": 1\r\n    \r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -53,7 +53,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"idEndereco\": 1,\r\n    \"nome\": \"12345678903\",\r\n    \"email\": \"044440404@gmail.com\"\r\n}\r\n\r\n",
+					"raw": "{\r\n\t\"idEndereco\": 1,\r\n    \"nome\": \"aeropoto2\",\r\n    \"email\": \"044440405@gmail.com\"\r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"

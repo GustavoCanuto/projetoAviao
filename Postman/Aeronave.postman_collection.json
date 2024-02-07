@@ -53,7 +53,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\r\n    \"modelo\": \"12345678903\",\r\n    \"nsa\": \"123456789\",\r\n    \"qtdAssentoEconomico\": 23,\r\n    \"qtdAssentoVip\": 44,\r\n    \"idCompanhia\": 1\r\n\r\n}\r\n\r\n",
+					"raw": "{\r\n\t\r\n    \"modelo\": \"aeronave1\",\r\n    \"nsa\": \"123456789\",\r\n    \"qtdAssentoEconomico\": 23,\r\n    \"qtdAssentoVip\": 44,\r\n    \"idCompanhia\": 1\r\n\r\n}\r\n\r\n",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -153,8 +153,8 @@ public class PassagemControllerTest {
 			LocalDateTime timestampChegada, Long idOrigem, Long idDestino, Long idAeronave, Long idPassageiro,
 			Double valorPassagem, TipoAssento tipoAssento) {
 
-		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(timestampCompra, timestampPartida, timestampChegada,
-				idOrigem, idDestino, idAeronave, idPassageiro, valorPassagem, tipoAssento);
+		PassagemDtoCadastro requestBody = new PassagemDtoCadastro( timestampPartida, timestampChegada,
+				idOrigem, idDestino, idAeronave, valorPassagem, tipoAssento);
 
 		ResponseEntity<PassagemDtoDetalhar> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody,
 				PassagemDtoDetalhar.class);
@@ -181,8 +181,8 @@ public class PassagemControllerTest {
 			LocalDateTime timestampChegada, Long idOrigem, Long idDestino, Long idAeronave, Long idPassageiro,
 			Double valorPassagem, TipoAssento tipoAssento, String mensagemDeErro) {
 
-		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(timestampCompra, timestampPartida, timestampChegada,
-				idOrigem, idDestino, idAeronave, idPassageiro, valorPassagem, tipoAssento);
+		PassagemDtoCadastro requestBody = new PassagemDtoCadastro( timestampPartida, timestampChegada,
+				idOrigem, idDestino, idAeronave, valorPassagem, tipoAssento);
 
 		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
 
@@ -271,8 +271,8 @@ public class PassagemControllerTest {
 	@DisplayName("Deveria manda exception ao usar id entidade invalido")
 	void cadastrarCenario2(Long idOrigem, Long idDestino, Long aeronave, Long passageiro ) {
 
-		PassagemDtoCadastro requestBody = new PassagemDtoCadastro(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-				LocalDateTime.of(2023, 10, 3, 15, 30), idOrigem, idDestino, aeronave, passageiro, 200D, TipoAssento.ECONOMICO);
+		PassagemDtoCadastro requestBody = new PassagemDtoCadastro( LocalDateTime.of(2023, 10, 2, 15, 30),
+				LocalDateTime.of(2023, 10, 3, 15, 30), idOrigem, idDestino, aeronave, 200D, TipoAssento.ECONOMICO);
 
 		ResponseEntity<String> responseEntity = restTemplate.postForEntity(URI_PRINCIPAL, requestBody, String.class);
 
