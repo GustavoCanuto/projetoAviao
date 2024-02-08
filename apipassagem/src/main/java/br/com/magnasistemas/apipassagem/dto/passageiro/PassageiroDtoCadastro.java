@@ -19,7 +19,7 @@ public record PassageiroDtoCadastro(
 		@Pattern(regexp = "\\d{11}", message = "O CPF deve conter 11 numeros.")
 		String cpf,
 		
-		@NotNull
+		
 		@Past(message = "A data de nascimento deve ser no passado.")
 		LocalDate dataNascimento,
 		

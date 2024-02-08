@@ -15,12 +15,12 @@ public class ValidarTimestampCompra implements ValidarCompraPassagem {
 
 	public void validar(PassagemDtoComprar dados, Long id) {
 
-		var passagem = passagemRepository.getReferenceById(id);
-
-		if (dados.timestampCompra().isAfter(passagem.getTimestampPartida())
-				|| dados.timestampCompra().isEqual(passagem.getTimestampPartida())) {
-			throw new ValidacaoException("A data/horário da compra deve ser antes da data/horário da partida");
-		}
+//		var passagem = passagemRepository.getReferenceById(id);
+//
+//		if (dados.timestampCompra().isAfter(passagem.getTimestampPartida())
+//				|| dados.timestampCompra().isEqual(passagem.getTimestampPartida())) {
+//			throw new ValidacaoException("A data/horário da compra deve ser antes da data/horário da partida");
+//		}
 
 	}
 

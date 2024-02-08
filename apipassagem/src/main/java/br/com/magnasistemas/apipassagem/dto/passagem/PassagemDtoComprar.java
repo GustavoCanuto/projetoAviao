@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record PassagemDtoComprar(
 	
-	@NotNull 
+
 	LocalDateTime timestampCompra,
 
 	@NotNull 

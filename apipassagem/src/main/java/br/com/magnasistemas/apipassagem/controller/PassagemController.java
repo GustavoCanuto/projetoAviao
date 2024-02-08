@@ -22,7 +22,9 @@ import br.com.magnasistemas.apipassagem.dto.passagem.PassagemDtoComprar;
 import br.com.magnasistemas.apipassagem.dto.passagem.PassagemDtoDetalhar;
 import br.com.magnasistemas.apipassagem.service.PassagemService;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("passagem")
 public class PassagemController {

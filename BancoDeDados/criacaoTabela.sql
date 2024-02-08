@@ -54,7 +54,7 @@ CREATE TABLE tb_passageiro(
     id bigserial PRIMARY KEY,
     nome_completo VARCHAR(100) NOT NULL,
     cpf varchar (20) not null unique,
-    data_nascimento date not null, 
+    data_nascimento date, 
     email VARCHAR(50) unique 
 );
 

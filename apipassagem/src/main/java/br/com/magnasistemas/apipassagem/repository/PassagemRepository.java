@@ -13,9 +13,14 @@ import jakarta.transaction.Transactional;
 
 public interface PassagemRepository extends JpaRepository<Passagem, Long> {
 
-	@Query(value = "SELECT * FROM tb_passagem " + "WHERE fk_origem = :idOrigem " + "AND fk_destino = :idDestino "
-			+ "AND fk_passageiro IS NULL "
-			+ "AND timestamp_partida > CURRENT_TIMESTAMP + interval '1 hour'", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_passagem "
+			+ "WHERE fk_origem = :idOrigem "
+			+ "AND fk_destino = :idDestino "
+			+ "AND timestamp_partida > CURRENT_TIMESTAMP + interval '1 hour'"
+			+ "AND fk_aeronave IN ("
+			+ "    SELECT id FROM tb_aeronave "
+			+ "    WHERE (qtd_assento_economico > 0 OR qtd_assento_vip > 0)"
+			+ ")", nativeQuery = true)
 	Page<Passagem> findAvailablePassagens(Pageable paginacao, Long idOrigem, Long idDestino);
 
 	@Query("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Passagem p " +

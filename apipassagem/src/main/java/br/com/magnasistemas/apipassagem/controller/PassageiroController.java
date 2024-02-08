@@ -19,7 +19,9 @@ import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoCadastro;
 import br.com.magnasistemas.apipassagem.dto.passageiro.PassageiroDtoDetalhar;
 import br.com.magnasistemas.apipassagem.service.PassageiroService;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("passageiro")
 public class PassageiroController {

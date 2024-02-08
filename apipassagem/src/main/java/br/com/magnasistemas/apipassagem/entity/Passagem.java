@@ -122,7 +122,7 @@ public class Passagem {
 
 	public void comprarPassagem(PassagemDtoComprar dados, Passageiro passageiro) {
 
-		this.timestampCompra = dados.timestampCompra();
+		//this.timestampCompra = dados.timestampCompra();
 		this.idPassageiro = passageiro;
 
 	}
