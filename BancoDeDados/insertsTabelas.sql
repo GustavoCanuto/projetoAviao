@@ -23,14 +23,14 @@ INSERT INTO tb_companhia_aerea (nome, cnpj, email) VALUES
 ('SkyRiders', '54321098765432', 'contact@skyriders.co');
 
 INSERT INTO tb_aeronave (modelo, qtd_assento_economico, qtd_assento_vip, nsa, fk_companhia) VALUES 
-('Boeing 737', 150, 20, 'ABC123', 1),
-('Airbus A320', 140, 15, 'DEF456', 2),
-('Embraer E190', 100, 10, 'GHI789', 3),
-('Boeing 777', 200, 30, 'JKL012', 4),
-('Airbus A380', 300, 40, 'MNO345', 5),
-('Bombardier CRJ900', 90, 8, 'PQR678', 6),
-('Boeing 747', 250, 35, 'STU901', 7),
-('Embraer E175', 80, 7, 'VWX234', 8),
+('Boeing 737', 1, 1, 'ABC123', 1),
+('Airbus A320', 1, 1, 'DEF456', 2),
+('Embraer E190', 1, 1, 'GHI789', 3),
+('Boeing 777', 3, 2, 'JKL012', 4),
+('Airbus A380', 3, 4, 'MNO345', 5),
+('Bombardier CRJ900', 1, 1, 'PQR678', 6),
+('Boeing 747', 1, 1, 'STU901', 7),
+('Embraer E175', 1, 1, 'VWX234', 8),
 ('Airbus A330', 180, 25, 'YZA567', 9),
 ('ATR 72', 70, 5, 'BCD890', 10);
 
