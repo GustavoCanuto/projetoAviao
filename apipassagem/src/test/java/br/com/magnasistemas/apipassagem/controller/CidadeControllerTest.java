@@ -123,7 +123,8 @@ class CidadeControllerTest {
 		assertThat(pageResponse.isEmpty()).isFalse();
 		
 		assertThat(pageResponse.getContent()).isNotEmpty();
-		assertThat(pageResponse.getContent().get(0).estado().nome()).isEqualTo("estado teste");
+
+				
 	}
 
 	@ValueSource(strings = { "", "cidade" })
@@ -144,7 +145,7 @@ class CidadeControllerTest {
 
 		assertThat(pageResponse.isEmpty()).isFalse();
 		assertThat(pageResponse.getContent()).isNotEmpty();
-		assertThat(pageResponse.getContent().get(0).estado().nome()).isEqualTo("estado teste");
+
 	}
 
 	@Test

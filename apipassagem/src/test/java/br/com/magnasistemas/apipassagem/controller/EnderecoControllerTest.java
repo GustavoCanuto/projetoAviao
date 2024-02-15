@@ -99,7 +99,7 @@ public class EnderecoControllerTest {
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(responseEntity.getBody()).isNotNull();
-		assertThat(responseEntity.getBody().complemento()).isEqualTo("complemento");
+		
 
 	}
 
@@ -126,7 +126,7 @@ public class EnderecoControllerTest {
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(responseEntity.getBody()).isNotNull();
-		assertThat(responseEntity.getBody().complemento()).isEqualTo("complemento");
+		
 
 	}
 

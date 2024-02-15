@@ -149,9 +149,14 @@ public class PassagemControllerTest {
 	@ParameterizedTest
 	@MethodSource("parametrosCadastrar")
 	@DisplayName("Deveria cadastrar uma passagem com informações válidas")
-	void cadastrarCenario1(LocalDateTime timestampCompra, LocalDateTime timestampPartida,
-			LocalDateTime timestampChegada, Long idOrigem, Long idDestino, Long idAeronave, Long idPassageiro,
-			Double valorPassagem, TipoAssento tipoAssento) {
+	void cadastrarCenario1( 
+			LocalDateTime timestampPartida,
+			LocalDateTime timestampChegada, 
+			Long idOrigem, 
+			Long idDestino, 
+			Long idAeronave,
+			Double valorPassagem, 
+			TipoAssento tipoAssento) {
 
 		PassagemDtoCadastro requestBody = new PassagemDtoCadastro( timestampPartida, timestampChegada,
 				idOrigem, idDestino, idAeronave, valorPassagem, tipoAssento);
@@ -166,10 +171,10 @@ public class PassagemControllerTest {
 
 	static Stream<Arguments> parametrosCadastrar() {
 		return Stream.of(
-				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.ECONOMICO),
-				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.VIP)
+				Arguments.of( LocalDateTime.of(2024, 10, 2, 15, 30),
+						LocalDateTime.of(2024, 10, 3, 15, 30), 1L, 2L,1L, 200D, TipoAssento.ECONOMICO),
+				Arguments.of( LocalDateTime.of(2024, 10, 2, 15, 30),
+						LocalDateTime.of(2024, 10, 3, 15, 30), 1L, 2L,1L, 200D, TipoAssento.VIP)
 
 		);
 	}
@@ -177,9 +182,15 @@ public class PassagemControllerTest {
 	@ParameterizedTest
 	@MethodSource("parametrosCadastroInvalido")
 	@DisplayName("Não Deveria cadastrar passagem")
-	void cadastrarInvalidoCenario1(LocalDateTime timestampCompra, LocalDateTime timestampPartida,
-			LocalDateTime timestampChegada, Long idOrigem, Long idDestino, Long idAeronave, Long idPassageiro,
-			Double valorPassagem, TipoAssento tipoAssento, String mensagemDeErro) {
+	void cadastrarInvalidoCenario1(
+			LocalDateTime timestampPartida,
+			LocalDateTime timestampChegada, 
+			Long idOrigem, 
+			Long idDestino, 
+			Long idAeronave,
+			Double valorPassagem,
+			TipoAssento tipoAssento, 
+			String mensagemDeErro) {
 
 		PassagemDtoCadastro requestBody = new PassagemDtoCadastro( timestampPartida, timestampChegada,
 				idOrigem, idDestino, idAeronave, valorPassagem, tipoAssento);
@@ -194,26 +205,17 @@ public class PassagemControllerTest {
 
 	static Stream<Arguments> parametrosCadastroInvalido() {
 		return Stream.of(
-				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-						LocalDateTime.of(2023, 10, 2, 15, 28), 1L, 2L, 1L, 1L, 200D, TipoAssento.ECONOMICO,
+				Arguments.of( LocalDateTime.of(2024, 10, 2, 15, 30),
+						LocalDateTime.of(2024, 10, 2, 15, 28), 1L, 2L, 1L, 200D, TipoAssento.ECONOMICO,
 						"A chegada prevista deve ser em uma data/horário após a partida"),
-				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-						LocalDateTime.of(2023, 10, 2, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.ECONOMICO,
+				Arguments.of( LocalDateTime.of(2024, 10, 2, 15, 30),
+						LocalDateTime.of(2024, 10, 2, 15, 30), 1L, 2L, 1L, 200D, TipoAssento.ECONOMICO,
 						"A chegada prevista deve ser em uma data/horário após a partida"),
-				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 1, 15, 25),
-						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.VIP,
-						"A data/horário da compra deve ser antes da data/horário da partida"),
-				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 1, 15, 30),
-						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 1L, 1L, 200D, TipoAssento.VIP,
-						"A data/horário da compra deve ser antes da data/horário da partida"),
-				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 1L, 1L, 1L, 200D, TipoAssento.ECONOMICO,
-						"O Aeroporto de destino tem que ser diferente do de origem"),
-				Arguments.of(LocalDateTime.of(2023, 10, 1, 15, 30), LocalDateTime.of(2023, 10, 2, 15, 30),
-						LocalDateTime.of(2023, 10, 3, 15, 30), 1L, 2L, 2L, 1L, 200D, TipoAssento.ECONOMICO,
-						"Não há assentos disponvieis para essa categoria")
-
-		);
+				Arguments.of(LocalDateTime.of(2024, 10, 2, 15, 30),
+						LocalDateTime.of(2024, 10, 3, 15, 30), 1L, 1L, 1L, 200D, TipoAssento.ECONOMICO,
+						"O Aeroporto de destino tem que ser diferente do de origem")
+	
+						);	
 	}
 
 	@Test

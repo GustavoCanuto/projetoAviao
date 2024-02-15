@@ -35,6 +35,7 @@ public class CompanhiaControllerTest {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
+
 	@Autowired
 	private CompanhiaAereaRepository companhiaAereaRepository;
 
@@ -155,7 +156,7 @@ public class CompanhiaControllerTest {
 
 		assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(responseEntity.getBody()).isNotNull();
-		assertThat(responseEntity.getBody().id()).isEqualTo(idExistente);
+		assertThat(responseEntity.getBody().id()).isEqualTo(idExistente); 
 
 	}
 

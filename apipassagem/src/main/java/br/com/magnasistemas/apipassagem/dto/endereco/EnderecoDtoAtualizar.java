@@ -3,20 +3,75 @@ package br.com.magnasistemas.apipassagem.dto.endereco;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record EnderecoDtoAtualizar(
+public class EnderecoDtoAtualizar{
 
-		 Long idCidade,
+		 Long idCidade;
 
 		 @Size(max = 255)
-		 String logradouro,
+		 String logradouro;
 
 		 @Size(max = 20)
-		 String complemento,
+		 String complemento;
 			
 		 @Size(max = 8)
-		 String numero,
+		 String numero;
 
 		 @Pattern(regexp = "\\d{8}",  message = "O Cep deve ter 8 numeros.") 
-		 String cep) {
+		 String cep;
+
+		public EnderecoDtoAtualizar(Long idCidade,  String logradouro,
+				 String complemento,  String numero,
+				 String cep) {
+			
+			this.idCidade = idCidade;
+			this.logradouro = logradouro;
+			this.complemento = complemento;
+			this.numero = numero;
+			this.cep = cep;
+		}
+
+		public Long idCidade() {
+			return idCidade;
+		}
+
+		public String logradouro() {
+			return logradouro;
+		}
+
+		public String complemento() {
+			return complemento;
+		}
+
+		public String numero() {
+			return numero;
+		}
+
+		public String cep() {
+			return cep;
+		}
+
+		public Long getIdCidade() {
+			return idCidade;
+		}
+
+		public String getLogradouro() {
+			return logradouro;
+		}
+
+		public String getComplemento() {
+			return complemento;
+		}
+
+		public String getNumero() {
+			return numero;
+		}
+
+		public String getCep() {
+			return cep;
+		}
+		 
+		
+		
+		 
 
 }
