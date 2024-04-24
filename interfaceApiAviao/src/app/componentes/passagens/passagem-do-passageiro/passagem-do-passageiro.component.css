@@ -1,0 +1,63 @@
+.mural {
+  gap: 2rem;
+  margin: 1rem 0 9rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title{
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.card-title2{
+  margin-top: 0.5rem;
+
+}
+
+.d-flex{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.acoes {
+  display: flex;
+  justify-content: flex-end
+}
+
+.passagens {
+  background-color: #39393a50;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 30px;
+}
+
+.passagens .conteudo {
+  margin: 1rem auto;
+  word-wrap: break-word;
+}
+
+.modelo1 {
+  box-shadow: 8px 8px 0px #154580;
+}
+
+.passagens-g {
+  width: 556px;
+}
+
+.passagens-p {
+  width: 262px;
+}
+
+@media screen and (max-width: 768px) {
+  .passagens-g {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 426px) {
+  .passagens-p {
+    width: 100%;
+  }
+}
+

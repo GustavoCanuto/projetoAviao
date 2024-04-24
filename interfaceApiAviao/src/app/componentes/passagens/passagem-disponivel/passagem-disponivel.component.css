@@ -1,0 +1,68 @@
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+
+
+.passagens {
+  background-color: #4949492f;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+.acoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.botao {
+  margin: 5px;
+  justify-self: flex-end;
+  align-self: flex-end;
+  width: 200px;
+  height: 70px;
+}
+
+.passagens .conteudo {
+  margin: 0.5rem 0.5rem;
+  word-wrap: break-word;
+}
+
+.passagens .card-title {
+  margin: 1rem 1rem;
+  word-wrap: break-word;
+  justify-self: center;
+  align-self: center;
+}
+
+.modelo1 {
+  box-shadow: 8px 8px 0px #154580;
+}
+
+.passagens-g {
+  width: 556px;
+}
+
+.passagens-p {
+  width: 262px;
+}
+
+@media screen and (max-width: 768px) {
+  .passagens-g {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 426px) {
+  .passagens-p {
+    width: 100%;
+  }
+}

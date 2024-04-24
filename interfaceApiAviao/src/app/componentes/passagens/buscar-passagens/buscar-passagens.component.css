@@ -1,0 +1,53 @@
+.acoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.botao {
+  margin: 5px;
+  margin-top: 30px;
+  width: 200px;
+}
+
+.buscar-passagens {
+  padding: 1rem 0;
+}
+
+.buscar-passagens form {
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.buscar-passagens form label {
+  color: #154580;
+  font-weight: bold;
+  margin: 0 0 0.5rem;
+}
+
+.buscar-passagens form .input {
+  border: none;
+  height: 60px;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  margin: 0.5rem 0 2rem;
+}
+
+
+.mensagem__erro {
+  font-size: 12px;
+  margin-left: 5px;
+  color: red;
+  margin-top: -25px;
+  margin-bottom: 20px;
+}
+
+.botao__desabilitado {
+  margin: 5px;
+  margin-top: 60px;
+  width: 200px;
+}

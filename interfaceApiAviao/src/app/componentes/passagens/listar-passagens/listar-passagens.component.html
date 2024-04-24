@@ -1,0 +1,16 @@
+<section class="container">
+  <header class="header d-flex">
+    <h2 class="ff-inter">Passagens Disponíveis</h2>
+  </header>
+  <div class="mural" *ngIf="listaPassagem.length > 0; else semPassagens">
+    <div *ngFor="let passagem of listaPassagem">
+      <app-passagem-disponivel [passagem]="passagem"></app-passagem-disponivel>
+    </div>
+  </div>
+</section>
+
+<ng-template #semPassagens>
+  <div class="ff-inter sem-passagens">
+    <p>Não há passagens disponíveis!</p>
+  </div>
+</ng-template>

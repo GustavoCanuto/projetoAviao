@@ -1,0 +1,12 @@
+<div class="passagens" [style.pointer-events]="isPassagemDisponivel(passagem) ? 'auto' : 'none'" [style.opacity]="isPassagemDisponivel(passagem) ? '1' : '0.5'">
+  <div class="card">
+    <h4 class="card-title">{{ passagem?.idOrigem?.nome }}  ----- {{ passagem?.idDestino?.nome }}</h4>
+    <p class="card-text conteudo">Partida : Dia {{ passagem?.timestampPartida?.replace('T', ' às ') }} ----- Chegada: Dia {{ passagem?.timestampChegada?.replace('T', ' às ') }}</p>
+    <p class="card-text conteudo">Tipo de assento: {{ passagem?.tipo }} ----- Valor: {{ passagem?.valorPassagem }}</p>
+    <p class="card-text conteudo">Companhia: {{ passagem?.idAeronave?.companhia?.nome }}</p>
+    <p class="card-text conteudo">Assentos <b> Econômicos </b> Disponíveis: <b>{{ passagem?.idAeronave?.qtdAssentoEconomico }}</b>
+      ------ Assentos <b>VIP</b> Disponíveis: <b>{{ passagem?.idAeronave?.qtdAssentoVip }}</b></p>
+
+  </div>
+  <button class="btn acoes botao" [disabled]="!isPassagemDisponivel(passagem)" (click)="comprarPassagemDisponivel(passagem)">Comprar passagem</button>
+</div>

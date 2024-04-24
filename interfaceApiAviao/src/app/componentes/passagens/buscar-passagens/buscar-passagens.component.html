@@ -1,0 +1,38 @@
+<section class="container buscar-passagens ff-inter">
+  <header class="header">
+    <h2>Escolha uma Origem e Destino da viagem:</h2>
+  </header>
+  <form [formGroup]="formulario">
+    <label for="origem">Aeroporto de Partida</label>
+    <select
+      class="input"
+      id="origem"
+      formControlName="origem"
+    >
+      <option value ="1">Aeroporto 1</option>
+      <option value="2">Aeroporto 2</option>
+      <option value="3" >Aeroporto 3</option>
+    </select>
+
+    <label for="destino">Aeroporto Destino</label>
+    <select
+      class="input"
+      id="destino"
+      formControlName="destino"
+    >
+      <option value="1">Aeroporto 1</option>
+      <option value="2">Aeroporto 2</option>
+      <option value="3">Aeroporto 3</option>
+    </select>
+
+    <div class="acoes">
+      <button
+        [disabled]="!formulario.valid"
+        (click)="buscarPassagem()"
+        [ngClass]="habilitarBotao()"
+      >
+        Buscar
+      </button>
+    </div>
+  </form>
+</section>

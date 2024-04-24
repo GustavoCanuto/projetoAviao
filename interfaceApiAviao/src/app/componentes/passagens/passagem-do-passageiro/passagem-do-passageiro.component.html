@@ -1,0 +1,23 @@
+<section class="container">
+  <header class="header d-flex">
+    <h2 class="ff-inter">Sua Passagem</h2>
+  </header>
+  <div class="mural" >
+    <div >
+      <div class="card">
+        <div class="passagens">
+          <h3 class="card-title">Nome do Passageiro: {{ passagemComprada?.idPassageiro?.nomeCompleto }} </h3>
+          <h4 class="card-title">CPF do Passageiro: {{ passagemComprada?.idPassageiro?.cpf }} </h4>
+          <h4 class="card-title2">{{ passagemComprada?.idOrigem?.nome }} ------ {{ passagemComprada?.idDestino?.nome }}</h4>
+          <p class="card-text conteudo">Partida : Dia {{ passagemComprada?.timestampPartida?.replace('T', ' às ') }} ----- Chegada: Dia {{ passagemComprada?.timestampChegada?.replace('T', ' às ') }}</p>
+          <p class="card-text conteudo">Tipo de assento: {{ passagemComprada?.tipo }} ------ Valor: {{ passagemComprada?.valorPassagem }}</p>
+          <p class="card-text conteudo">Companhia: {{ passagemComprada?.idAeronave?.companhia?.nome }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+

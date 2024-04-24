@@ -1,0 +1,66 @@
+<section class="container buscar-passagens ff-inter">
+  <header class="header">
+      <h2>Cadastre suas informações para comprar a Passagem:</h2>
+  </header>
+  <form [formGroup]="formulario">
+
+    <label for="nomeCompleto">Nome Completo</label>
+    <input
+      type="textarea"
+      class="input"
+      id="nomeCompleto"
+      formControlName="nomeCompleto"
+      placeholder="Digite o nome completo"
+
+        >
+<div class="mensagem__erro" *ngIf="formulario.get('nomeCompleto')?.errors && formulario.get('nomeCompleto')?.touched">
+  Nome é obrgiatório!
+</div>
+<div class="mensagem__erro" *ngIf="formulario.get('nomeCompleto')?.errors?.['minlength'] && formulario.get('nomeCompleto')?.touched">
+  Nome precisa ter no mínimo 5 caracteres!
+</div>
+<label for="cpf">Cpf</label>
+    <input
+      type="text"
+      class="input"
+      id="cpf"
+      formControlName="cpf"
+      placeholder="Digite seu cpf"
+
+        >
+        <div class="mensagem__erro" *ngIf="formulario.get('cpf')?.errors?.['required'] && formulario.get('cpf')?.touched" >
+          Cpf é obrgiatória!
+        </div>
+        <div class="mensagem__erro" *ngIf="formulario.get('cpf')?.errors?.['minlength'] && formulario.get('cpf')?.touched">
+          Cpf precisa ter no mínimo 11 caracteres!
+        </div>
+
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="input"
+          id="email"
+          formControlName="email"
+          placeholder="Digite seu email"
+        >
+
+        <div class="mensagem__erro" *ngIf="formulario.get('email')?.errors && formulario.get('email')?.touched">
+          Email é obrigatório e deve ser válido!
+        </div>
+
+
+        <div class="acoes">
+          <div class="mensagem__erro_api" *ngIf="mensagemErro">
+            {{ mensagemErro }}
+          </div>
+          <button
+          [disabled]="!formulario.valid"
+         (click)="comprarPassagem()"
+          [ngClass]="habilitarBotao()"
+          >Comprar</button>
+        </div>
+
+    </form>
+</section>
+
+
